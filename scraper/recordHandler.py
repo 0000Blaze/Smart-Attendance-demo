@@ -25,13 +25,13 @@ def splitClasses():
 def addNewStudents():
     #added required students record
     dataAB=[
-        [96,'PUL075BCT097 ','BIBEK BASHYAL'],
-        [98,'PUL075BCT098 ','SAUGAT KAFLE']
+        [96,'PUL075BCT097   ','BIBEK BASHYAL'],
+        [98,'PUL075BCT098   ','SAUGAT KAFLE']
     ]
 
     dataCD =[
-        [97,'PUL075BCT098 ','ACHYUT BURLAKOTI'],
-        [99,'PUL075BCT100 ','SIJAL BARAL']
+        [97,'PUL075BCT098   ','ACHYUT BURLAKOTI'],
+        [99,'PUL075BCT100   ','SIJAL BARAL']
     ]
 
     # Open our existing CSV file for AB class
