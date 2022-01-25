@@ -56,3 +56,4 @@ records = pd.DataFrame({
 
 #convert pandas dataframe to csv file
 records.to_csv('records.csv')
+print("Records retrived and save as record.csv")
