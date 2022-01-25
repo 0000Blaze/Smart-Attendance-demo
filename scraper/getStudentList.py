@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
-url ="http://doece.pcampus.edu.np/index.php/students-bachelor-in-computer-engineering/?fbclid=IwAR0WHHYvNonw4CVQXrXwzVnfx9gNQwkU86z84ncTLgkFx54Ue07cofXOep0"
+url ="http://doece.pcampus.edu.np/index.php/students-bachelor-in-computer-engineering/"
 headers = {"Accept-Language":"en-US,en;q=0.5"}
 results = requests.get(url,headers=headers)
 
