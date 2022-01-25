@@ -1,3 +1,6 @@
 testing_apk_dev/.buildozer
 testing_apk_dev/assets
-
+*.csv
+*.jpg
+*.png
+*.jpeg
