@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
+
 url ="http://doece.pcampus.edu.np/index.php/students-bachelor-in-computer-engineering/"
 headers = {"Accept-Language":"en-US,en;q=0.5"}
 results = requests.get(url,headers=headers)
@@ -62,5 +63,5 @@ records = pd.DataFrame({
 })
 
 #convert pandas dataframe to csv file
-records.to_csv('records.csv')
+records.to_csv('PUL075BCT.csv')
 print("Records retrived and save as record.csv")

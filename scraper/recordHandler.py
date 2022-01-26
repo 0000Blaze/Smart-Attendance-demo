@@ -13,12 +13,12 @@ def splitClasses():
     batch_no = 1
     text = "AB"
 
-    for chunk in pd.read_csv('records.csv',chunksize=chuck_size):
+    for chunk in pd.read_csv('PUL075BCT.csv',chunksize=chuck_size):
         if batch_no == 1:
-            chunk.to_csv('record'+ text + '.csv',index=False)
+            chunk.to_csv('PUL075BCT'+ text + '.csv',index=False)
         else:
             text = "CD"
-            chunk.to_csv('record'+ text + '.csv',index=False)
+            chunk.to_csv('PUL075BCT'+ text + '.csv',index=False)
         batch_no = batch_no + 1
     print("\nSuccesful split into two records\n")
 
@@ -35,13 +35,13 @@ def addNewStudents():
     ]
 
     # Open our existing CSV file for AB class
-    with open('recordAB.csv', 'a',newline='') as f_object:
+    with open('PUL075BCTAB.csv', 'a',newline='') as f_object:
         writer_object = writer(f_object)
         writer_object.writerows(dataAB)
         f_object.close()
 
     # Open our existing CSV file for CD class
-    with open('recordCD.csv', 'a',newline='') as f_object:
+    with open('PUL075BCTCD.csv', 'a',newline='') as f_object:
         writer_object = writer(f_object)
         writer_object.writerows(dataCD)
         f_object.close()
