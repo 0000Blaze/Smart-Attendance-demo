@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
+from recordHandler import splitClasses
+from recordHandler import addNewStudents
 
 url ="http://doece.pcampus.edu.np/index.php/students-bachelor-in-computer-engineering/"
 headers = {"Accept-Language":"en-US,en;q=0.5"}
@@ -65,3 +67,9 @@ records = pd.DataFrame({
 #convert pandas dataframe to csv file
 records.to_csv('PUL075BCT.csv')
 print("Records retrived and save as PUL075BCT.csv")
+
+try:
+    splitClasses()
+    addNewStudents()
+except:
+    print("\n SOME ERROR OCCURED\n")

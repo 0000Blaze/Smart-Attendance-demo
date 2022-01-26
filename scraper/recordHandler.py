@@ -1,3 +1,5 @@
+## ONLY MODULES HERE IMPORTED IN getStudentList.py
+
 #made to handle the csv file
 #1. split classes AB and CD studnets
 #2. add the new transfer students
@@ -20,17 +22,24 @@ def splitClasses():
             text = "CD"
             chunk.to_csv('PUL075BCT'+ text + '.csv',index=False)
         batch_no = batch_no + 1
-    print("\nSuccesful split into two records\n")
+    print("Succesful split into two records")
 
 def addNewStudents():
     #added required students record
     dataAB=[
         [96,'PUL075BCT097   ','BIBEK BASHYAL'],
-        [98,'PUL075BCT098   ','SAUGAT KAFLE']
+        [98,'PUL075BCT099   ','SAUGAT KAFLE']
     ]
 
     dataCD =[
         [97,'PUL075BCT098   ','ACHYUT BURLAKOTI'],
+        [99,'PUL075BCT100   ','SIJAL BARAL']
+    ]
+
+    data =[
+        [96,'PUL075BCT097   ','BIBEK BASHYAL'],
+        [97,'PUL075BCT098   ','ACHYUT BURLAKOTI'],
+        [98,'PUL075BCT099   ','SAUGAT KAFLE'],
         [99,'PUL075BCT100   ','SIJAL BARAL']
     ]
 
@@ -46,10 +55,11 @@ def addNewStudents():
         writer_object.writerows(dataCD)
         f_object.close()
     
-    print("\nSuccesful added new students in AB and CD\n")
+    print("Succesful added new students in AB and CD")
 
-try:
-    splitClasses()
-    addNewStudents()
-except:
-    print("\n SOME ERROR OCCURED\n")
+    #add students to PUL075BCT
+    with open('PUL075BCT.csv', 'a',newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerows(data)
+        f_object.close()
+    print("Succesful added new students in PUL075BCT\n")
