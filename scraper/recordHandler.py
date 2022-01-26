@@ -48,12 +48,8 @@ def addNewStudents():
     
     print("\nSuccesful added new students in AB and CD\n")
 
-
-variable = input("Choose:\n 1.Split classes\n 2.Added new students\n")
-variable_int = int(variable)
-if variable_int == 1:
+try:
     splitClasses()
-elif variable_int == 2:
     addNewStudents()
-else:
+except:
     print("\n SOME ERROR OCCURED\n")
