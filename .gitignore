@@ -4,3 +4,4 @@ testing_apk_dev/assets
 *.jpg
 *.png
 *.jpeg
+__pycache__
