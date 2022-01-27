@@ -75,3 +75,14 @@ html {
     font-weight: 500;
     color: whitesmoke;
 }
+/* footer section styling */
+footer {
+    background: #111;
+    padding: 15px 23px;
+    color: #fff;
+    text-align: center;
+}
+footer span {
+    color: crimson;
+    text-decoration: none;
+}
