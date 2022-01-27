@@ -43,5 +43,5 @@ html {
     background-size: 100%;
     background-image: url("../images/whiteHouse.jpeg");
     background-repeat: no-repeat;
-    background-position: center center;
+    /*background-position: center center;*/
 }
