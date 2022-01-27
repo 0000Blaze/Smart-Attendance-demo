@@ -70,3 +70,8 @@ html {
 .card:hover .box {
     transform: scale(1.05);
 }
+.card .text {
+    font-size: 20px;
+    font-weight: 500;
+    color: whitesmoke;
+}
