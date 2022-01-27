@@ -16,7 +16,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: lightblue;
+    background-color: black;
 }
 .navbar .logo{
     margin-left: 15px;
@@ -37,4 +37,12 @@ html {
 
 .navbar .logOut-btn:hover{
     transform: scale(1.2);
+}
+.bg-image{
+    padding: 20em;
+    background-size: 100%;
+    background-image: url("../images/whiteHouse.jpeg");
+    background-repeat: no-repeat;
+    outline: 2px solid black;
+    background-position: center center;
 }
