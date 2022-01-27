@@ -33,21 +33,27 @@ html {
     padding: 10px 5px 10px 5px;
     border-radius: 10px;
     background-color: crimson;
+    width: auto;
+    height: auto;
 }
 
 .navbar .logOut-btn:hover{
     transform: scale(1.2);
 }
 .bg-image{
-    padding: 18em;
-    background-size: 100%;
+    height: 600px;
+    background-position: center center;
+    background-size: cover;
     background-image: url("../images/bct.jpeg");
     background-repeat: no-repeat;
-    justify-content: space-between;
-    display: flex;
+    background-attachment: fixed;
     align-items: center;
 }
 
+.card-holder{
+    padding: 5em;
+    padding-top: 16em;
+}
 .card {
     width: calc(25% - 20px);
     background: #222;
@@ -59,6 +65,7 @@ html {
     margin: 5px;
     height: auto;
     overflow: auto;
+    float: inline-start;
   }
 .card:hover {
     background: crimson;
@@ -89,4 +96,28 @@ footer .text2{
 footer .text1{
     color: whitesmoke;
     text-decoration: none;
+}
+
+
+/****************8 responsive media query start **********88*/
+@media (max-width: 1104px) {
+
+}
+
+@media (max-width: 991px) {
+}
+@media (max-width: 947px) {
+  .card {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 690px) {
+  .card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+
 }
