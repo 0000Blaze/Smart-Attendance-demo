@@ -16,7 +16,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: black;
+    background-color: #0009;
 }
 .navbar .logo{
     margin-left: 15px;
@@ -43,6 +43,5 @@ html {
     background-size: 100%;
     background-image: url("../images/whiteHouse.jpeg");
     background-repeat: no-repeat;
-    outline: 2px solid black;
     background-position: center center;
 }
