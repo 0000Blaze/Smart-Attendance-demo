@@ -39,18 +39,17 @@ html {
     transform: scale(1.2);
 }
 .bg-image{
-    padding: 20em;
+    padding: 18em;
     background-size: 100%;
-    background-image: url("../images/whiteHouse.jpeg");
+    background-image: url("../images/bct.jpeg");
     background-repeat: no-repeat;
-    /*background-position: center center;*/
     justify-content: space-between;
     display: flex;
     align-items: center;
 }
 
 .card {
-    width: calc(33% - 20px);
+    width: calc(25% - 20px);
     background: #222;
     text-align: center;
     border-radius: 6px;
@@ -71,7 +70,7 @@ html {
     transform: scale(1.05);
 }
 .card .text {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: whitesmoke;
 }

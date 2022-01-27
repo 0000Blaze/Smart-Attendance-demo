@@ -39,7 +39,7 @@ html {
     transform: scale(1.2);
 }
 .bg-image{
-    padding: 20em;
+    padding: 15em;
     background-size: 100%;
     background-image: url("../images/whiteHouse.jpeg");
     background-repeat: no-repeat;
