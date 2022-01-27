@@ -44,4 +44,29 @@ html {
     background-image: url("../images/whiteHouse.jpeg");
     background-repeat: no-repeat;
     /*background-position: center center;*/
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    width: calc(33% - 20px);
+    background: #222;
+    text-align: center;
+    border-radius: 6px;
+    padding: 25px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+    height: auto;
+    overflow: auto;
+  }
+.card:hover {
+    background: crimson;
+  }
+.card .box {
+    transition: all 0.3s ease;
+}
+.card:hover .box {
+    transform: scale(1.05);
 }
