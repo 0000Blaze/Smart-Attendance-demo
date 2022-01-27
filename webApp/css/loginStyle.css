@@ -96,9 +96,13 @@ button{
   margin-top: 30px;
   display: flex;
 }
+.naviButton a{
+    text-decoration: none;
+    margin: 0px;
+}
 .naviButton div{
   background: red;
-  width: 200px;
+  width: 190px;
   border-radius: 3px;
   padding: 5px 10px 10px 5px;
   background-color: rgba(255,255,255,0.27);
