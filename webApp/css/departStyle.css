@@ -82,7 +82,12 @@ footer {
     color: #fff;
     text-align: center;
 }
-footer span {
+footer .text2{
     color: crimson;
+    text-decoration: none;
+}
+
+footer .text1{
+    color: whitesmoke;
     text-decoration: none;
 }
