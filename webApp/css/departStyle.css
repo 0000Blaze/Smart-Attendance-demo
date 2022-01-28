@@ -56,6 +56,7 @@ body{
 .card-holder{
     padding: 5em;
     padding-top: 16em;
+    align-items: center;
 }
 .card {
     width: calc(33% - 20px);
