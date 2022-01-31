@@ -1,0 +1,157 @@
+WindowManager:
+    MainWindow:
+    BctWindow:
+    BexWindow:
+    BelWindow:
+    SectionWindow:
+    BctCDWindow:
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols:1
+
+        Button:
+            text: "Bct"
+            on_release:
+                app.root.current = "bct"
+                root.manager.transition.direction = "left"
+
+
+        Button:
+            text: "Bex"
+            on_release:
+                app.root.current = "bex"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Bel"
+            on_release:
+                app.root.current = "bel"
+                root.manager.transition.direction = "left"
+
+
+<BctWindow>:
+    name: "bct"
+
+    GridLayout: 
+        cols:2
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        
+        GridLayout:
+            cols: 1
+            
+            Button:
+                text : "First Year"
+            
+            Button:
+                text : "Second Year"
+
+            Button:
+                text : "Third Year"
+                on_release:
+                    app.root.current ="section"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text : "Fourth Year"
+
+
+<BexWindow>:
+    name: "bex"
+
+    GridLayout: 
+        cols:2
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        GridLayout:
+            cols:1
+            Button:
+                text : "First Year"
+
+            Button:
+                text : "Second Year"
+
+            Button:
+                text : "Third Year"
+
+            Button:
+                text : "Fourth Year"
+
+<BelWindow>:
+    name: "bel"
+
+    GridLayout: 
+        cols:2
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+        GridLayout:
+            cols:1
+            Button:
+                text : "First Year"
+
+            Button:
+                text : "Second Year"
+
+            Button:
+                text : "Third Year"
+
+            Button:
+                text : "Fourth Year"
+            
+
+<SectionWindow>:
+    name: "section"
+
+    GridLayout:
+        cols:2
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "bct"
+                root.manager.transition.direction = "right"
+    
+        GridLayout:
+            cols: 1
+
+            Button:
+                text : "AB"
+        
+            Button:
+                text : "CD"
+                on_release:
+                    app.root.current = "bct-cd"
+                    root.manager.transition.direction = "left"
+<BctCDWindow>:
+    name : "bct-cd"
+
+    GridLayout:
+        cols:1
+        
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "section"
+                root.manager.transition.direction = "right"
+
+        Button:
+            text: "Start Attendance"
+    
+        
+        

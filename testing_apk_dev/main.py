@@ -7,13 +7,13 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 
 
-class TestApp(App):
+class TeacherApp(App):
     def build(self):
     
-        self.img1 = Image(source="assets/pic.jpg",size_hint=(1, .8))
+        self.img1 = Image(source="assets/logo.png",size_hint=(1, .8))
         self.verificationLabel = Label(
-            text="Verification Uninitiated", size_hint=(1, .1))
-        self.btn1 = Button(text='Verify', size_hint=(1, .1))
+            text="Your solution to attendance", size_hint=(1, .1))
+        self.btn1 = Button(text='Start Atteandance', size_hint=(1, .1))
 
     	# layout of app
         layout = BoxLayout(orientation='vertical')
@@ -23,5 +23,5 @@ class TestApp(App):
         
         return layout
 
+TeacherApp().run()
 
-TestApp().run()
