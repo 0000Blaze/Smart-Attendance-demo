@@ -76,21 +76,31 @@ WindowManager:
                 size_hint: [None, None]
                 size: [200, 200]
     
-        GridLayout: 
-            cols:2    
-            size_hint : [None,None]
-            size : [500,200]
+        AnchorLayout:
 
+            anchor_x :'right'
+            anchor_y :'top'
+            
             Button:
                 id: "back-btn"
                 text: "Go Back"
+                size_hint : [None,None]
+                size : [100,50]
+                
                 on_release:
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
-            
+        
+        AnchorLayout:
+
+            anchor_x :'center'
+            anchor_y :'center'
+
             GridLayout:
                 cols: 1
-                
+                size_hint : [None,None]
+                size : [500,200]
+   
                 Button:
                     text : "First Year"
                 
@@ -110,72 +120,135 @@ WindowManager:
 <BexWindow>:
     name: "bex"
 
-    GridLayout: 
-        cols:2
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
 
-        Button:
-            id: "back-btn"
-            text: "Go Back"
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "right"
+        AnchorLayout:
+            anchor_x :'left'
+            anchor_y :'top'
 
-        GridLayout:
-            cols:1
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [200, 200]
+    
+        AnchorLayout:
+
+            anchor_x :'right'
+            anchor_y :'top'
+            
             Button:
-                text : "First Year"
+                id: "back-btn"
+                text: "Go Back"
+                size_hint : [None,None]
+                size : [100,50]
+                
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+        
+        AnchorLayout:
 
-            Button:
-                text : "Second Year"
+            anchor_x :'center'
+            anchor_y :'center'
 
-            Button:
-                text : "Third Year"
+            GridLayout:
+                cols: 1
+                size_hint : [None,None]
+                size : [500,200]
+   
+                Button:
+                    text : "First Year"
+                
+                Button:
+                    text : "Second Year"
 
-            Button:
-                text : "Fourth Year"
+                Button:
+                    text : "Third Year"
+
+                Button:
+                    text : "Fourth Year"
 
 <BelWindow>:
     name: "bel"
 
-    GridLayout: 
-        cols:2
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
 
-        Button:
-            id: "back-btn"
-            text: "Go Back"
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "right"
+        AnchorLayout:
+            anchor_x :'left'
+            anchor_y :'top'
 
-        GridLayout:
-            cols:1
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [200, 200]
+    
+        AnchorLayout:
+
+            anchor_x :'right'
+            anchor_y :'top'
+            
             Button:
-                text : "First Year"
+                id: "back-btn"
+                text: "Go Back"
+                size_hint : [None,None]
+                size : [100,50]
+                
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+        
+        AnchorLayout:
 
-            Button:
-                text : "Second Year"
+            anchor_x :'center'
+            anchor_y :'center'
 
-            Button:
-                text : "Third Year"
+            GridLayout:
+                cols: 1
+                size_hint : [None,None]
+                size : [500,200]
+   
+                Button:
+                    text : "First Year"
+                
+                Button:
+                    text : "Second Year"
 
-            Button:
-                text : "Fourth Year"
+                Button:
+                    text : "Third Year"
+
+                Button:
+                    text : "Fourth Year"
             
 
 <SectionWindow>:
     name: "section"
 
-    GridLayout:
-        cols:2
+    AnchorLayout:
+        anchor_x:'right'
+        anchor_y:'top'
+        
         Button:
             id: "back-btn"
             text: "Go Back"
+            size:[100,50]
+            size_hint:[None,None]
             on_release:
                 app.root.current = "bct"
                 root.manager.transition.direction = "right"
-    
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+
         GridLayout:
             cols: 1
+            size_hint:[None,None]
+            size:[100,100]
 
             Button:
                 text : "AB"
@@ -188,15 +261,22 @@ WindowManager:
 <BctCDWindow>:
     name : "bct-cd"
 
-    GridLayout:
-        cols:1
-        
-        Button:
-            id: "back-btn"
-            text: "Go Back"
-            on_release:
-                app.root.current = "section"
-                root.manager.transition.direction = "right"
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+
+        AnchorLayout:
+            anchor_x:'right' 
+            anchor_y:'top'
+            
+            Button:
+                id: "back-btn"
+                text: "Go Back"
+                size_hint:[None,None]
+                size: [100,50]
+                on_release:
+                    app.root.current = "section"
+                    root.manager.transition.direction = "right"
 
         Button:
             text: "Start Attendance"
