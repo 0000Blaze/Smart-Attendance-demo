@@ -1,3 +1,9 @@
+<Button>
+    font_size : 20
+    color : 0.3,0.6,0.5,1
+    size_hint : 0.3,0.1
+
+
 WindowManager:
     MainWindow:
     BctWindow:
@@ -9,58 +15,96 @@ WindowManager:
 <MainWindow>:
     name: "main"
 
-    GridLayout:
-        cols:1
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
 
-        Button:
-            text: "Bct"
-            on_release:
-                app.root.current = "bct"
-                root.manager.transition.direction = "left"
+        AnchorLayout:
+            anchor_x :'center'
+            anchor_y :'top'
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [500, 400]
+        
+
+        AnchorLayout:
+            anchor_x :'center'
+            anchor_y :'bottom'
+
+            GridLayout:
+                size_hint : [None,None]
+                size : [500,200]
+                cols:1
+
+                Button:
+                    text: "Bct"
+                    on_release:
+                        app.root.current = "bct"
+                        root.manager.transition.direction = "left"
 
 
-        Button:
-            text: "Bex"
-            on_release:
-                app.root.current = "bex"
-                root.manager.transition.direction = "left"
+                Button:
+                    text: "Bex"
+                    on_release:
+                        app.root.current = "bex"
+                        root.manager.transition.direction = "left"
 
-        Button:
-            text: "Bel"
-            on_release:
-                app.root.current = "bel"
-                root.manager.transition.direction = "left"
+                Button:
+                    text: "Bel"
+                    on_release:
+                        app.root.current = "bel"
+                        root.manager.transition.direction = "left"
 
 
 <BctWindow>:
     name: "bct"
 
-    GridLayout: 
-        cols:2
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
 
-        Button:
-            text: "Go Back"
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "right"
-        
-        GridLayout:
-            cols: 1
-            
-            Button:
-                text : "First Year"
-            
-            Button:
-                text : "Second Year"
+        AnchorLayout:
+            anchor_x :'left'
+            anchor_y :'top'
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [200, 200]
+    
+        GridLayout: 
+            cols:2    
+            size_hint : [None,None]
+            size : [500,200]
 
             Button:
-                text : "Third Year"
+                id: "back-btn"
+                text: "Go Back"
                 on_release:
-                    app.root.current ="section"
-                    root.manager.transition.direction = "left"
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+            
+            GridLayout:
+                cols: 1
+                
+                Button:
+                    text : "First Year"
+                
+                Button:
+                    text : "Second Year"
 
-            Button:
-                text : "Fourth Year"
+                Button:
+                    text : "Third Year"
+                    on_release:
+                        app.root.current ="section"
+                        root.manager.transition.direction = "left"
+
+                Button:
+                    text : "Fourth Year"
 
 
 <BexWindow>:
@@ -70,6 +114,7 @@ WindowManager:
         cols:2
 
         Button:
+            id: "back-btn"
             text: "Go Back"
             on_release:
                 app.root.current = "main"
@@ -96,6 +141,7 @@ WindowManager:
         cols:2
 
         Button:
+            id: "back-btn"
             text: "Go Back"
             on_release:
                 app.root.current = "main"
@@ -122,6 +168,7 @@ WindowManager:
     GridLayout:
         cols:2
         Button:
+            id: "back-btn"
             text: "Go Back"
             on_release:
                 app.root.current = "bct"
@@ -145,6 +192,7 @@ WindowManager:
         cols:1
         
         Button:
+            id: "back-btn"
             text: "Go Back"
             on_release:
                 app.root.current = "section"
