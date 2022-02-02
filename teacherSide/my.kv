@@ -1,4 +1,5 @@
 #:import Window kivy.core.window.Window
+#:import Time time.sleep
 
 #:set butH Window.height/4
 #:set butW Window.width/3
@@ -14,10 +15,17 @@
 
 #:set smallButHeightHint 0.05
 #:set fontSize Window.width/30
+
+#:set backgroundColor [1,0,0.5,1]
+#:set textColor [1,1,0,1]
+#:set recentUsedColor [1,1,0,1]
+
 <Button>
     font_size : fontSize
-    color : 0.3,0.6,0.5,1
+    color : textColor
+    background_color : backgroundColor
     size_hint : 0.3,0.1
+    
 
 
 WindowManager:
@@ -56,10 +64,15 @@ WindowManager:
                 cols:1
 
                 Button:
+                    id:bctBtn
                     text: "Bct"
+                    # JUST A TEST TO LEARN USING KV AND PYTHOM
+                    # on_press : root.buttonPressed(bctBtn) ,Time(0.5),root.exitingButtonPress(bctBtn)
+                    on_press : root.buttonPressed(bctBtn,recentUsedColor)
                     on_release:
                         app.root.current = "bct"
                         root.manager.transition.direction = "left"
+                        root.exitingButtonPress(bctBtn)
 
 
                 Button:
@@ -102,7 +115,7 @@ WindowManager:
                 text: "Go Back"
                 size_hint : [None,None]
                 size : [smallButW,smallButH]
-                
+
                 on_release:
                     app.root.current = "main"
                     root.manager.transition.direction = "right"
