@@ -1,5 +1,21 @@
+#:import Window kivy.core.window.Window
+
+#:set butH Window.height/4
+#:set butW Window.width/3
+
+#:set mainImgH Window.height/3
+#:set mainImgW Window.width/1.2
+
+#:set smallImgH Window.height/6
+#:set smallImgW Window.width/3
+
+#:set smallButH Window.height/18
+#:set smallButW Window.width/4
+
+#:set smallButHeightHint 0.05
+#:set fontSize Window.width/30
 <Button>
-    font_size : 20
+    font_size : fontSize
     color : 0.3,0.6,0.5,1
     size_hint : 0.3,0.1
 
@@ -27,16 +43,16 @@ WindowManager:
             Image:
                 source: "assets/logo.png"
                 size_hint: [None, None]
-                size: [500, 400]
+                size: [mainImgW,mainImgH]
         
 
         AnchorLayout:
             anchor_x :'center'
-            anchor_y :'bottom'
+            anchor_y :'center'
 
             GridLayout:
                 size_hint : [None,None]
-                size : [500,200]
+                size : [butW,butH]
                 cols:1
 
                 Button:
@@ -74,7 +90,7 @@ WindowManager:
             Image:
                 source: "assets/logo.png"
                 size_hint: [None, None]
-                size: [200, 200]
+                size: [smallImgW,smallImgH]
     
         AnchorLayout:
 
@@ -85,7 +101,7 @@ WindowManager:
                 id: "back-btn"
                 text: "Go Back"
                 size_hint : [None,None]
-                size : [100,50]
+                size : [smallButW,smallButH]
                 
                 on_release:
                     app.root.current = "main"
@@ -99,7 +115,7 @@ WindowManager:
             GridLayout:
                 cols: 1
                 size_hint : [None,None]
-                size : [500,200]
+                size : [butW,butH]
    
                 Button:
                     text : "First Year"
@@ -132,7 +148,7 @@ WindowManager:
             Image:
                 source: "assets/logo.png"
                 size_hint: [None, None]
-                size: [200, 200]
+                size: [smallImgW,smallImgH]
     
         AnchorLayout:
 
@@ -143,7 +159,7 @@ WindowManager:
                 id: "back-btn"
                 text: "Go Back"
                 size_hint : [None,None]
-                size : [100,50]
+                size : [smallButW,smallButH]
                 
                 on_release:
                     app.root.current = "main"
@@ -157,7 +173,7 @@ WindowManager:
             GridLayout:
                 cols: 1
                 size_hint : [None,None]
-                size : [500,200]
+                size : [butW,butH]
    
                 Button:
                     text : "First Year"
@@ -186,7 +202,7 @@ WindowManager:
             Image:
                 source: "assets/logo.png"
                 size_hint: [None, None]
-                size: [200, 200]
+                size: [smallImgW,smallImgH]
     
         AnchorLayout:
 
@@ -197,7 +213,7 @@ WindowManager:
                 id: "back-btn"
                 text: "Go Back"
                 size_hint : [None,None]
-                size : [100,50]
+                size : [smallButW,smallButH]
                 
                 on_release:
                     app.root.current = "main"
@@ -211,7 +227,7 @@ WindowManager:
             GridLayout:
                 cols: 1
                 size_hint : [None,None]
-                size : [500,200]
+                size : [butW,butH]
    
                 Button:
                     text : "First Year"
@@ -230,24 +246,41 @@ WindowManager:
     name: "section"
 
     AnchorLayout:
-        anchor_x:'right'
-        anchor_y:'top'
-        
-        Button:
-            id: "back-btn"
-            text: "Go Back"
-            size:[100,50]
-            size_hint:[None,None]
-            on_release:
-                app.root.current = "bct"
-                root.manager.transition.direction = "right"
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
+
+        AnchorLayout:
+            anchor_x :'left'
+            anchor_y :'top'
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [smallImgW,smallImgH]
+    
+        AnchorLayout:
+
+            anchor_x :'right'
+            anchor_y :'top'
+            
+            Button:
+                id: "back-btn"
+                text: "Go Back"
+                size_hint : [None,None]
+                size : [smallButW,smallButH]
+                
+                on_release:
+                    app.root.current = "bct"
+                    root.manager.transition.direction = "right"
+    
     AnchorLayout:
         anchor_x:'center'
         anchor_y:'center'
 
         GridLayout:
             cols: 1
-            size_hint:[None,None]
+            size_hint:[0.3,0.15]
             size:[100,100]
 
             Button:
@@ -264,16 +297,28 @@ WindowManager:
     AnchorLayout:
         anchor_x:'center'
         anchor_y:'center'
+        rows:3
 
         AnchorLayout:
-            anchor_x:'right' 
-            anchor_y:'top'
+            anchor_x :'left'
+            anchor_y :'top'
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [smallImgW,smallImgH]
+    
+        AnchorLayout:
+
+            anchor_x :'right'
+            anchor_y :'top'
             
             Button:
                 id: "back-btn"
                 text: "Go Back"
-                size_hint:[None,None]
-                size: [100,50]
+                size_hint : [None,None]
+                size : [smallButW,smallButH]
+                
                 on_release:
                     app.root.current = "section"
                     root.manager.transition.direction = "right"
