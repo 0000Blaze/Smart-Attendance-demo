@@ -1,0 +1,109 @@
+#:import Window kivy.core.window.Window
+
+#:set mainImgH Window.height/3
+#:set mainImgW Window.width/1.2
+
+#:set smallButH Window.height/18
+#:set smallButW Window.width/4
+
+#:set smallImgH Window.height/6
+#:set smallImgW Window.width/3
+
+#:set rollnoLabelPosX 100
+#:set rollnoLabelPosY 100
+
+#:set labelW Window.height/3
+#:set labelH Window.width/3
+<RollNoInput>:
+    # field_id: ti
+    BoxLayout:
+        cols: 3
+        orientation : 'vertical'
+        Label:
+            text: root.field_text
+            pos: rollnoLabelPosX,rollnoLabelPosY
+            size: labelW,labelH
+        TextInput:
+            id: tinp
+            name :"tinp"
+            hint_text: root.field_placeholder
+            pos : 500,20
+            
+        Button:
+            id: verifyRoll
+            name:"verifyRoll"
+            text : "Verify"
+            on_release: 
+                root.process(tinp)
+                app.root.current = "camera"
+                
+WindowManager:
+    MainWindow:
+    CameraWindow:
+
+
+
+
+<MainWindow>:
+    name : "main"
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'top'
+
+        Image:
+            source: "assets/logo.png"
+            size_hint: [None, None]
+            size: [mainImgW,mainImgH]
+        
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows : 2
+
+        RollNoInput:
+            id:rinp
+            field_text: self.getText()
+            field_placeholder: self.getPlaceHolder()
+            
+                
+
+                
+<CameraWindow>:
+    name:"camera"
+    BoxLayout:
+        orientation : 'vertical'
+        rows : 2
+        BoxLayout:
+            size : 200,200
+            orientation : 'horizontal'
+            colums : 2
+            AnchorLayout:
+                anchor_x :'left'
+                anchor_y :'top'
+
+                Image:
+                    source: "assets/logo.png"
+                    size_hint: [None, None]
+                    size: [smallImgW,smallImgH]
+            AnchorLayout:
+
+                anchor_x :'right'
+                anchor_y :'top'
+                    
+                Button:
+                    id: "back-btn"
+                    text: "Go Back"
+                    size_hint : [None,None]
+                    size : [smallButW,smallButH]
+
+                    on_release:
+                        app.root.current = "main"
+                        # root.manager.transition.direction = "right"
+        BoxLayout:
+            orientation : 'vertical'
+            rowss : 2
+
+            Label:
+                text : "Verifying Face..."
+            Image:
+                source : './images/test1.png'
