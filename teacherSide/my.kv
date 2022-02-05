@@ -64,6 +64,18 @@ WindowManager:
                 size : [butW,butH]
                 cols:1
 
+                GridLayout:
+                    size_hint : [None,None]
+                    size : [butW,butH/2]
+                    cols:2
+
+                    Label:
+                        text:"Teacher ID:"
+                    
+                    TextInput:
+                        id: teacherId
+                        multiline: False
+                
                 Button:
                     text: "next"
                     on_release:
