@@ -5,3 +5,4 @@ testing_apk_dev/.buildozer
 *.jpeg
 __pycache__
 teacherSide/.buildozer
+studentApp/.buildozer
