@@ -9,33 +9,12 @@
 #:set smallImgH Window.height/6
 #:set smallImgW Window.width/3
 
-#:set rollnoLabelPosX 100
-#:set rollnoLabelPosY 100
+#:set rollnoLabelPosX 1
+#:set rollnoLabelPosY 1
 
-#:set labelW Window.height/3
-#:set labelH Window.width/3
-<RollNoInput>:
-    # field_id: ti
-    BoxLayout:
-        cols: 3
-        orientation : 'vertical'
-        Label:
-            text: root.field_text
-            pos: rollnoLabelPosX,rollnoLabelPosY
-            size: labelW,labelH
-        TextInput:
-            id: tinp
-            name :"tinp"
-            hint_text: root.field_placeholder
-            pos : 500,20
-            
-        Button:
-            id: verifyRoll
-            name:"verifyRoll"
-            text : "Verify"
-            on_release: 
-                root.process(tinp)
-                app.root.current = "camera"
+#:set labelH 0.15
+#:set labelW 0.4
+
                 
 WindowManager:
     MainWindow:
@@ -59,11 +38,31 @@ WindowManager:
         anchor_x:'center'
         anchor_y:'center'
         rows : 2
-
-        RollNoInput:
-            id:rinp
-            field_text: self.getText()
-            field_placeholder: self.getPlaceHolder()
+        
+        BoxLayout:
+            columns: 3
+            orientation : 'vertical'
+            size_hint : 0.7,0.3
+            Label:
+                text: root.stdRoll.field_text
+                #pos: rollnoLabelPosX,rollnoLabelPosY
+                #size_hint: labelW,labelH
+            TextInput:
+                id: tinp
+                name :"tinp"
+                hint_text: root.stdRoll.field_placeholder
+                #size_hint : labelW,labelH
+                
+            Button:
+                id: verifyRoll
+                name:"verifyRoll"
+                text : "Verify"
+                
+                #size_hint : labelW,labelH
+                on_release: 
+                    root.stdRoll.process(tinp)
+                    app.root.current = "camera"
+                    root.manager.transition.direction = "left"
             
                 
 
@@ -98,7 +97,7 @@ WindowManager:
 
                     on_release:
                         app.root.current = "main"
-                        # root.manager.transition.direction = "right"
+                        root.manager.transition.direction = "right"
         BoxLayout:
             orientation : 'vertical'
             rowss : 2

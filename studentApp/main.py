@@ -10,8 +10,8 @@ Window.size = (540, 960)
 
 class RollNoInput(Widget):
     field_id = ObjectProperty(None)
-    field_text = StringProperty('Roll No:')
-    field_placeholder = StringProperty('Enter Roll no:')
+    field_text = StringProperty(None)
+    field_placeholder = StringProperty(None)
     text = ""
 
     def getText(self):
@@ -30,6 +30,11 @@ class RollNoInput(Widget):
 
 
 class MainWindow(Screen):
+    stdRoll = RollNoInput()
+    stdRoll.field_id = ObjectProperty(None)
+    stdRoll.field_text = 'Roll No:'
+    stdRoll.field_placeholder = 'Enter Roll no:'
+    stdRoll.text = ""
     pass
 
 
