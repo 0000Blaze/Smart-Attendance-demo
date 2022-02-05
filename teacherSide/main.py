@@ -8,7 +8,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 from kivy.properties import NumericProperty, ObjectProperty
-from kivy.uix.dropdown import DropDown
+from kivy.uix.spinner import Spinner
 # Window.size = (540, 960)
 
 

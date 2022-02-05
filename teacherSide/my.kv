@@ -423,5 +423,48 @@ WindowManager:
                     Button:
                         text: "Stop Attendance"
             
-        
-        
+                    Button:
+                        id: btn
+                        text: 'Class'
+                        on_release: dropdown.open(self)
+
+                    DropDown:
+                        id: dropdown
+                        on_parent: self.dismiss()
+                        on_select: btn.text = '{}'.format(args[1])
+
+                        Button:
+                            text: 'OS'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('OS')
+
+                        Button:
+                            text: 'OOAD'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('OOAD')
+                        
+                        Button:
+                            text: 'AI'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('AI')
+                        
+                        Button:
+                            text: 'DBMS'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('DBMS')
+                        
+                        Button:
+                            text: 'ES'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('ES')
+
+                        Button:
+                            text: 'EE'
+                            size_hint_y: None
+                            height: butH/4
+                            on_release: dropdown.select('EE')        
