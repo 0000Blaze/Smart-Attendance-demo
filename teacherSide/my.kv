@@ -30,6 +30,7 @@
 
 WindowManager:
     MainWindow:
+    DepartmentWindow:
     BctWindow:
     BexWindow:
     BelWindow:
@@ -64,6 +65,55 @@ WindowManager:
                 cols:1
 
                 Button:
+                    text: "next"
+                    on_release:
+                        app.root.current = "dpwindow"
+                        root.manager.transition.direction = "left"
+
+
+
+<DepartmentWindow>:
+    name: "dpwindow"
+
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows:3
+
+        AnchorLayout:
+            anchor_x :'center'
+            anchor_y :'top'
+
+            Image:
+                source: "assets/logo.png"
+                size_hint: [None, None]
+                size: [mainImgW,mainImgH]
+        
+        AnchorLayout:
+
+            anchor_x :'right'
+            anchor_y :'top'
+            
+            Button:
+                id: "back-btn"
+                text: "Go Back"
+                size_hint : [None,None]
+                size : [smallButW,smallButH]
+                
+                on_release:
+                    app.root.current = "main"
+                    root.manager.transition.direction = "right"
+        
+        AnchorLayout:
+            anchor_x :'center'
+            anchor_y :'center'
+
+            GridLayout:
+                size_hint : [None,None]
+                size : [butW,butH]
+                cols:1
+
+                Button:
                     id:bctBtn
                     text: "Bct"
                     # JUST A TEST TO LEARN USING KV AND PYTHOM
@@ -86,6 +136,7 @@ WindowManager:
                     on_release:
                         app.root.current = "bel"
                         root.manager.transition.direction = "left"
+        
 
 
 <BctWindow>:
@@ -117,7 +168,7 @@ WindowManager:
                 size : [smallButW,smallButH]
 
                 on_release:
-                    app.root.current = "main"
+                    app.root.current = "dpwindow"
                     root.manager.transition.direction = "right"
         
         AnchorLayout:
@@ -175,7 +226,7 @@ WindowManager:
                 size : [smallButW,smallButH]
                 
                 on_release:
-                    app.root.current = "main"
+                    app.root.current = "dpwindow"
                     root.manager.transition.direction = "right"
         
         AnchorLayout:
@@ -229,7 +280,7 @@ WindowManager:
                 size : [smallButW,smallButH]
                 
                 on_release:
-                    app.root.current = "main"
+                    app.root.current = "dpwindow"
                     root.manager.transition.direction = "right"
         
         AnchorLayout:
