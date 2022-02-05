@@ -400,9 +400,9 @@ WindowManager:
                     root.manager.transition.direction = "right"
 
             AnchorLayout:
-                anchor_x :'center'
+                anchor_x :'right'
                 anchor_y :'center'
-            
+                 
                 GridLayout:
                     size_hint : [None,None]
                     size : [butW,butH]
@@ -422,15 +422,22 @@ WindowManager:
                     
                     Button:
                         text: "Stop Attendance"
-            
+
+                AnchorLayout:
+                    anchor_x :'center'
+                    anchor_y :'center'
+
+
                     Button:
                         id: btn
                         text: 'Class'
                         on_release: dropdown.open(self)
 
+                    Widget:
+                        on_parent:dropdown.dismiss() 
+                    
                     DropDown:
                         id: dropdown
-                        on_parent: self.dismiss()
                         on_select: btn.text = '{}'.format(args[1])
 
                         Button:
