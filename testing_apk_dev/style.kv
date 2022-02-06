@@ -1,3 +1,4 @@
+#:import XCamera kivy.garden.xcamera.XCamera
 #:import Window kivy.core.window.Window
 
 #:set mainImgH Window.height/3
@@ -98,11 +99,7 @@ WindowManager:
                     on_release:
                         app.root.current = "main"
                         root.manager.transition.direction = "right"
-        BoxLayout:
+        FloatLayout:
             orientation : 'vertical'
-            rowss : 2
-
-            Label:
-                text : "Verifying Face..."
-            Image:
-                source : './images/test1.png'
+            XCamera:
+                id: xcamera

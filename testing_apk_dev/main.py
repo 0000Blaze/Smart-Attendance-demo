@@ -1,9 +1,11 @@
+import kivy
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
+
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 # Window.size = (540, 960)
 
