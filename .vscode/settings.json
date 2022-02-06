@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./testing_apk_dev/.buildozer/android/platform/build-armeabi-v7a/build/other_builds/android-sdl2/armeabi-v7a__ndk_target_21/android/build/lib.linux-x86_64-3.8"
+        "./testing_apk_dev/.buildozer/android/platform/build-armeabi-v7a/build/other_builds/android-sdl2/armeabi-v7a__ndk_target_21/android/build/lib.linux-x86_64-3.8",
+        "./testing_apk_dev/.buildozer/android/platform/build-armeabi-v7a/build/python-installs/myapp"
     ]
 }
