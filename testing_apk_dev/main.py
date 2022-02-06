@@ -1,3 +1,4 @@
+from kivy.utils import platform
 import kivy
 from kivy.app import App
 from kivy.lang import Builder
@@ -7,13 +8,14 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
-# Window.size = (540, 960)
+#Window.size = (540, 960)
 
-from kivy.utils import platform
 
 if platform == "android":
-  from android.permissions import request_permissions, Permission
-  request_permissions([Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
+    from android.permissions import request_permissions, Permission
+    request_permissions([Permission.READ_EXTERNAL_STORAGE,
+                        Permission.WRITE_EXTERNAL_STORAGE])
+
 
 class RollNoInput(Widget):
     field_id = ObjectProperty(None)
