@@ -1,4 +1,3 @@
-from kivy.utils import platform
 import kivy
 from kivy.app import App
 from kivy.lang import Builder
@@ -6,16 +5,64 @@ from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
-
+from kivy.utils import platform
+from kivy.clock import mainthread
+from kivy.logger import Logger
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 #Window.size = (540, 960)
 
+def is_android():
+    return platform == 'android'
 
-if platform == "android":
-    from android.permissions import request_permissions, Permission
-    request_permissions([Permission.READ_EXTERNAL_STORAGE,
-                        Permission.WRITE_EXTERNAL_STORAGE])
+'''
+Runtime permissions:
+'''
 
+def check_camera_permission():
+    """
+    Android runtime `CAMERA` permission check.
+    """
+    if not is_android():
+        return True
+    from android.permissions import Permission, check_permission
+    permission = Permission.CAMERA
+    return check_permission(permission)
+
+
+def check_request_camera_permission(callback=None):
+    """
+    Android runtime `CAMERA` permission check & request.
+    """
+    had_permission = check_camera_permission()
+    Logger.info("CameraAndroid: CAMERA permission {%s}.", had_permission)
+    if not had_permission:
+        Logger.info("CameraAndroid: CAMERA permission was denied.")
+        Logger.info("CameraAndroid: Requesting CAMERA permission.")
+        from android.permissions import Permission, request_permissions
+        permissions = [Permission.CAMERA]
+        request_permissions(permissions, callback)
+        had_permission = check_camera_permission()
+        Logger.info("CameraAndroid: Returned CAMERA permission {%s}.", had_permission)
+    else:
+        Logger.info("CameraAndroid: Camera permission granted.")
+    return had_permission
+
+
+perm_denied = '''
+BoxLayout:
+    orientation: 'vertical'
+    size: root.size
+
+    canvas:
+        Color:
+            rgb: 0, 0, 0
+        Rectangle:
+            size: self.size
+
+    Label:
+        text:"DENIED CAMERA"
+
+'''
 
 class RollNoInput(Widget):
     field_id = ObjectProperty(None)
@@ -61,8 +108,17 @@ kv = Builder.load_file("style.kv")
 class StudentApp(App):
 
     def build(self):
-        return kv
+        @mainthread
+        def on_permissions_callback(permissions, grant_results):
+            
+            if all(grant_results):
+                        return kv
+        if check_request_camera_permission(callback=on_permissions_callback):
+                    return kv
+        else:
+            return Builder.load_string(perm_denied)
 
+    
 
 if __name__ == "__main__":
     StudentApp().run()
