@@ -1,3 +1,5 @@
+#: import XCamera kivy.garden.xcamera.XCamera
+
 #:import Window kivy.core.window.Window
 
 #:set mainImgH Window.height/3
@@ -98,21 +100,7 @@ WindowManager:
                     on_release:
                         app.root.current = "main"
                         root.manager.transition.direction = "right"
-        FloatLayout:
-            orientation : 'vertical'
-            
-            Camera:
-                id: camera
-                resolution: 399, 299
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: '48dp'
-                Button:
-                    text: 'Start'
-                    on_release: camera.play = True
-
-                Button:
-                    text: 'Stop'
-                    on_release: camera.play = False
+        BoxLayout:
+    
+            XCamera:
+                id:xcamera
