@@ -1,0 +1,120 @@
+#: import XCamera kivy_garden.xcamera.XCamera
+
+#:import Window kivy.core.window.Window
+
+#:set mainImgH Window.height/3
+#:set mainImgW Window.width/1.2
+
+#:set smallButH Window.height/18
+#:set smallButW Window.width/4
+
+#:set smallImgH Window.height/6
+#:set smallImgW Window.width/3
+
+#:set rollnoLabelPosX 1
+#:set rollnoLabelPosY 1
+
+#:set labelH 0.15
+#:set labelW 0.4
+
+                
+WindowManager:
+    MainWindow:
+    CameraWindow:
+
+
+
+
+<MainWindow>:
+    name : "main"
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'top'
+
+        Image:
+            source: "assets/logo.png"
+            size_hint: [None, None]
+            size: [mainImgW,mainImgH]
+        
+    AnchorLayout:
+        anchor_x:'center'
+        anchor_y:'center'
+        rows : 2
+        
+        BoxLayout:
+            columns: 3
+            orientation : 'vertical'
+            size_hint : 0.7,0.3
+            Label:
+                text: root.stdRoll.field_text
+                #pos: rollnoLabelPosX,rollnoLabelPosY
+                #size_hint: labelW,labelH
+            TextInput:
+                id: tinp
+                name :"tinp"
+                hint_text: root.stdRoll.field_placeholder
+                #size_hint : labelW,labelH
+                
+            Button:
+                id: verifyRoll
+                name:"verifyRoll"
+                text : "Verify"
+                
+                #size_hint : labelW,labelH
+                on_release: 
+                    root.stdRoll.process(tinp)
+                    app.root.current = "camera"
+                    root.manager.transition.direction = "left"
+            
+                
+
+                
+<CameraWindow>:
+    name:"camera"
+    BoxLayout:
+        orientation : 'vertical'
+        rows : 2
+        BoxLayout:
+            size : 200,200
+            orientation : 'horizontal'
+            colums : 2
+            AnchorLayout:
+                anchor_x :'left'
+                anchor_y :'top'
+
+                Image:
+                    source: "assets/logo.png"
+                    size_hint: [None, None]
+                    size: [smallImgW,smallImgH]
+            AnchorLayout:
+
+                anchor_x :'right'
+                anchor_y :'top'
+                    
+                Button:
+                    id: "back-btn"
+                    text: "Go Back"
+                    size_hint : [None,None]
+                    size : [smallButW,smallButH]
+
+                    on_release:
+                        app.root.current = "main"
+                        root.manager.transition.direction = "right"
+        BoxLayout:
+            orientation:'vertical'
+            XCamera:
+                id:xcamera
+                on_picture_taken: app.picture_taken(*args)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, None
+                height: sp(50)
+                
+                Button:
+                    text: 'Set landscape'
+                    on_release: xcamera.force_landscape()
+
+                Button:
+                    text: 'Restore orientation'
+                    on_release: xcamera.restore_orientation()
