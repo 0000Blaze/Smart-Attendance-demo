@@ -104,6 +104,10 @@ WindowManager:
             orientation:'vertical'
             XCamera:
                 id:xcamera
+                resolution: (960,1280)
+                play: True
+                size_hint: 1,1
+                allow_stretch: True
                 on_picture_taken: app.picture_taken(*args)
 
             BoxLayout:
