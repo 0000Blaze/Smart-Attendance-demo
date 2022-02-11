@@ -9,10 +9,12 @@ from kivy.utils import platform
 from kivy.clock import mainthread
 from kivy.logger import Logger
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
-#Window.size = (540, 960)
-
 def is_android():
     return platform == 'android'
+
+if not is_android():
+    Window.size = (540, 960)
+
 
 '''
 Runtime permissions:

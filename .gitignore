@@ -7,3 +7,4 @@ __pycache__
 teacherSide/.buildozer
 studentApp/.buildozer
 testing_apk_dev/kivyy
+*/.vscode
