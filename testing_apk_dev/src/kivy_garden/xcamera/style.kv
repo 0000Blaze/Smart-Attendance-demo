@@ -110,6 +110,13 @@ WindowManager:
                 size_hint: 1,1
                 allow_stretch: True
                 on_picture_taken: app.picture_taken(*args)
+                canvas.before:
+                    PushMatrix
+                    Rotate:
+                        angle: -90
+                        origin: self.center
+                canvas.after:
+                    PopMatrix
 
             BoxLayout:
                 orientation: 'horizontal'
