@@ -98,7 +98,6 @@ class MainWindow(Screen):
 class CameraWindow(Screen):
     def picture_taken(self, obj, filename):
         print('Picture taken and saved to {}'.format(filename))
-
     pass
 
 

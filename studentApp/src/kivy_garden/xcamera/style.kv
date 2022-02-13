@@ -109,24 +109,11 @@ WindowManager:
                 play: True
                 size_hint: 1,1
                 allow_stretch: True
-                on_picture_taken: app.picture_taken(*args)
                 canvas.before:
                     PushMatrix
                     Rotate:
-                        angle: -90
+                        #angle: -90                 #uncomment before apk dev for non rotated image
                         origin: self.center
                 canvas.after:
                     PopMatrix
 
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint: 1, None
-                height: sp(50)
-                
-                Button:
-                    text: 'Set landscape'
-                    on_release: xcamera.force_landscape()
-
-                Button:
-                    text: 'Restore orientation'
-                    on_release: xcamera.restore_orientation()
