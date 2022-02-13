@@ -104,7 +104,7 @@ WindowManager:
             orientation:'vertical'
             XCamera:
                 id:xcamera
-                index:0
+                index:1
                 resolution: (640,480)
                 play: True
                 size_hint: 1,1
@@ -112,7 +112,7 @@ WindowManager:
                 canvas.before:
                     PushMatrix
                     Rotate:
-                        #angle: -90                 #uncomment before apk dev for non rotated image
+                        angle: 90                 #uncomment before apk dev for non rotated image
                         origin: self.center
                 canvas.after:
                     PopMatrix
