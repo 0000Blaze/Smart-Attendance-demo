@@ -30,11 +30,6 @@
 
 WindowManager:
     MainWindow:
-    DepartmentWindow:
-    BctWindow:
-    BexWindow:
-    BelWindow:
-    SectionWindow:
     BctCDWindow:
 
 <MainWindow>:
@@ -59,314 +54,28 @@ WindowManager:
             anchor_x :'center'
             anchor_y :'center'
 
-            GridLayout:
-                size_hint : [None,None]
-                size : [butW,butH]
-                cols:1
-
-                GridLayout:
-                    size_hint : [None,None]
-                    size : [butW,butH/2]
-                    cols:2
-
-                    Label:
-                        text:"Teacher ID:"
+            BoxLayout:
+                columns: 3
+                orientation : 'vertical'
+                size_hint : 0.7,0.3
+                
+                Label:
+                    id: t_id
+                    text:"Teacher ID:"
+                
+                TextInput:
+                    id: teacherId
+                    multiline: False
                     
-                    TextInput:
-                        id: teacherId
-                        multiline: False
-                
                 Button:
-                    text: "next"
-                    on_release:
-                        app.root.current = "dpwindow"
+                    name:"verify"
+                    text :"Verify"
+                    
+                    size_hint : 1,0.8
+                    on_release: 
+                        app.root.current = "bct-cd"
                         root.manager.transition.direction = "left"
 
-
-
-<DepartmentWindow>:
-    name: "dpwindow"
-
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
-
-        AnchorLayout:
-            anchor_x :'center'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [mainImgW,mainImgH]
-        
-        AnchorLayout:
-
-            anchor_x :'right'
-            anchor_y :'top'
-            
-            Button:
-                id: "back-btn"
-                text: "Go Back"
-                size_hint : [None,None]
-                size : [smallButW,smallButH]
-                
-                on_release:
-                    app.root.current = "main"
-                    root.manager.transition.direction = "right"
-        
-        AnchorLayout:
-            anchor_x :'center'
-            anchor_y :'center'
-
-            GridLayout:
-                size_hint : [None,None]
-                size : [butW,butH]
-                cols:1
-
-                Button:
-                    id:bctBtn
-                    text: "Bct"
-                    # JUST A TEST TO LEARN USING KV AND PYTHOM
-                    # on_press : root.buttonPressed(bctBtn) ,Time(0.5),root.exitingButtonPress(bctBtn)
-                    on_press : root.buttonPressed(bctBtn,recentUsedColor)
-                    on_release:
-                        app.root.current = "bct"
-                        root.manager.transition.direction = "left"
-                        root.exitingButtonPress(bctBtn)
-
-
-                Button:
-                    text: "Bex"
-                    on_release:
-                        app.root.current = "bex"
-                        root.manager.transition.direction = "left"
-
-                Button:
-                    text: "Bel"
-                    on_release:
-                        app.root.current = "bel"
-                        root.manager.transition.direction = "left"
-        
-
-
-<BctWindow>:
-    name: "bct"
-
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
-
-        AnchorLayout:
-            anchor_x :'left'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [smallImgW,smallImgH]
-    
-        AnchorLayout:
-
-            anchor_x :'right'
-            anchor_y :'top'
-            
-            Button:
-                id: "back-btn"
-                text: "Go Back"
-                size_hint : [None,None]
-                size : [smallButW,smallButH]
-
-                on_release:
-                    app.root.current = "dpwindow"
-                    root.manager.transition.direction = "right"
-        
-        AnchorLayout:
-
-            anchor_x :'center'
-            anchor_y :'center'
-
-            GridLayout:
-                cols: 1
-                size_hint : [None,None]
-                size : [butW,butH]
-   
-                Button:
-                    text : "First Year"
-                
-                Button:
-                    text : "Second Year"
-
-                Button:
-                    text : "Third Year"
-                    on_release:
-                        app.root.current ="section"
-                        root.manager.transition.direction = "left"
-
-                Button:
-                    text : "Fourth Year"
-
-
-<BexWindow>:
-    name: "bex"
-
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
-
-        AnchorLayout:
-            anchor_x :'left'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [smallImgW,smallImgH]
-    
-        AnchorLayout:
-
-            anchor_x :'right'
-            anchor_y :'top'
-            
-            Button:
-                id: "back-btn"
-                text: "Go Back"
-                size_hint : [None,None]
-                size : [smallButW,smallButH]
-                
-                on_release:
-                    app.root.current = "dpwindow"
-                    root.manager.transition.direction = "right"
-        
-        AnchorLayout:
-
-            anchor_x :'center'
-            anchor_y :'center'
-
-            GridLayout:
-                cols: 1
-                size_hint : [None,None]
-                size : [butW,butH]
-   
-                Button:
-                    text : "First Year"
-                
-                Button:
-                    text : "Second Year"
-
-                Button:
-                    text : "Third Year"
-
-                Button:
-                    text : "Fourth Year"
-
-<BelWindow>:
-    name: "bel"
-
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
-
-        AnchorLayout:
-            anchor_x :'left'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [smallImgW,smallImgH]
-    
-        AnchorLayout:
-
-            anchor_x :'right'
-            anchor_y :'top'
-            
-            Button:
-                id: "back-btn"
-                text: "Go Back"
-                size_hint : [None,None]
-                size : [smallButW,smallButH]
-                
-                on_release:
-                    app.root.current = "dpwindow"
-                    root.manager.transition.direction = "right"
-        
-        AnchorLayout:
-
-            anchor_x :'center'
-            anchor_y :'center'
-
-            GridLayout:
-                cols: 1
-                size_hint : [None,None]
-                size : [butW,butH]
-   
-                Button:
-                    text : "First Year"
-                
-                Button:
-                    text : "Second Year"
-
-                Button:
-                    text : "Third Year"
-
-                Button:
-                    text : "Fourth Year"
-            
-
-<SectionWindow>:
-    name: "section"
-
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
-
-        AnchorLayout:
-            anchor_x :'left'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [smallImgW,smallImgH]
-    
-        AnchorLayout:
-
-            anchor_x :'right'
-            anchor_y :'top'
-            
-            Button:
-                id: "back-btn"
-                text: "Go Back"
-                size_hint : [None,None]
-                size : [smallButW,smallButH]
-                
-                on_release:
-                    app.root.current = "bct"
-                    root.manager.transition.direction = "right"
-    
-    AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-
-        GridLayout:
-            cols: 1
-            size_hint:[0.3,0.15]
-            size:[100,100]
-
-            Button:
-                text : "AB"
-        
-            Button:
-                text : "CD"
-                on_release:
-                    app.root.current = "bct-cd"
-                    root.manager.transition.direction = "left"
 <BctCDWindow>:
     name : "bct-cd"
 
@@ -396,82 +105,94 @@ WindowManager:
                 size : [smallButW,smallButH]
                 
                 on_release:
-                    app.root.current = "section"
+                    app.root.current = "main"
                     root.manager.transition.direction = "right"
 
             AnchorLayout:
-                anchor_x :'right'
+                anchor_x :'left'  
                 anchor_y :'center'
-                 
-                GridLayout:
-                    size_hint : [None,None]
-                    size : [butW,butH]
-                    cols:1
-            
-                    GridLayout:
-                        size_hint : [None,None]
-                        size : [butW,butH/3]
-                        cols:1
-                        
-                        TextInput:
-                            id: attendanceToken
-                            multiline: False
-                        
+     
+                BoxLayout:
+                    orientation:'vertical'
+                    columns:2
+                    size_hint : 1,0.2
+
                     Button:
-                        text: "Start Attendance"
-                    
+                        text: "Update Attendance"
+
                     Button:
                         text: "Stop Attendance"
 
-                AnchorLayout:
-                    anchor_x :'center'
-                    anchor_y :'center'
+            AnchorLayout:
+                anchor_x :'center'  
+                anchor_y :'center'
+                
+                BoxLayout:
+                    columns: 3
+                    orientation : 'vertical'
+                    size_hint : 0.3,0.3
+                    
+                    Label:
+                        id: class_label
+                        text:"Class:"
+                    
+                    TextInput:
+                        id: class_id
+                        multiline: False
+                        
+                    Button:
+                        text :"Start Attendance"
+                        size_hint : 1,0.8
 
+            AnchorLayout:
+                anchor_x :'right'  
+                anchor_y :'center'
+
+
+                Button:
+                    id: btn
+                    text: 'Subject'
+                    on_release: dropdown.open(self)
+                    
+                Widget:
+                    on_parent:dropdown.dismiss() 
+                    
+                DropDown:
+                    id: dropdown
+                    on_select: btn.text = '{}'.format(args[1])
 
                     Button:
-                        id: btn
-                        text: 'Class'
-                        on_release: dropdown.open(self)
+                        text: 'OS'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('OS')
 
-                    Widget:
-                        on_parent:dropdown.dismiss() 
-                    
-                    DropDown:
-                        id: dropdown
-                        on_select: btn.text = '{}'.format(args[1])
-
-                        Button:
-                            text: 'OS'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('OS')
-
-                        Button:
-                            text: 'OOAD'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('OOAD')
+                    Button:
+                        text: 'OOAD'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('OOAD')
                         
-                        Button:
-                            text: 'AI'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('AI')
+                    Button:
+                        text: 'AI'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('AI')
                         
-                        Button:
-                            text: 'DBMS'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('DBMS')
+                    Button:
+                        text: 'DBMS'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('DBMS')
                         
-                        Button:
-                            text: 'ES'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('ES')
+                    Button:
+                        text: 'ES'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('ES')
 
-                        Button:
-                            text: 'EE'
-                            size_hint_y: None
-                            height: butH/4
-                            on_release: dropdown.select('EE')        
+                    Button:
+                        text: 'EE'
+                        size_hint_y: None
+                        height: butH/4
+                        on_release: dropdown.select('EE')        

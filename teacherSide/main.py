@@ -25,30 +25,6 @@ class MainWindow(Screen):
         btn.background_color = self.prevColor
     pass
 
-class DepartmentWindow(Screen):
-    def buttonPressed(self, btn, recentUsedColor):
-        self.prevColor = btn.background_color
-        btn.background_color = recentUsedColor
-
-    def exitingButtonPress(self, btn):
-        btn.background_color = self.prevColor    
-    pass
-
-class BctWindow(Screen):
-    pass
-
-
-class BexWindow(Screen):
-    pass
-
-
-class BelWindow(Screen):
-    pass
-
-
-class SectionWindow(Screen):
-    pass
-
 
 class BctCDWindow(Screen):
     pass
