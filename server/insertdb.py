@@ -98,7 +98,7 @@ def insertStudent(stuid, name, classid, depid, face_embd):
         newrow = ',("{0}", {1}, {2})'.format(stuid, i+1, face_embd[i+1])
         face_query += newrow
     try:
-        print(face_query)
+        #print(face_query)
         mysqlconn, mycursor = connect2db()
         try:
             mycursor.execute(student_query)

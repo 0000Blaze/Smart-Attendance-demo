@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import face_recognition
 
+###################################subject insertion####################################
 subjectBCT = {
     "SH401":"Engineering Mathematics I",
     "CT402":"Computr Programming",
@@ -69,6 +70,10 @@ subjectBCT = {
     "CT755":"Project(Part B)"
 }
 
+for x in subjectBCT:
+    insertdb.insertSubject(x,subjectBCT[x])
+
+##########################################class insertion##############################
 classDB={
     "074bctAb":"074bctAb",
     "074bexAb":"074bexAb",
@@ -90,6 +95,10 @@ classDB={
     "077belAb":"077belAb"
 }
 
+for x in classDB:
+    insertdb.insertClass(x,classDB[x])
+
+######################################department insertion##########################
 departmentDb={
     "1":"Department of Architecture",
     "2":"Department of Civil Engineering",
@@ -98,12 +107,17 @@ departmentDb={
     "5":"Department of Electronics and Computer Engineering"
 
 }
-################################# face embedding calculation ###########################################
 
+
+for x in departmentDb:
+    insertdb.insertDepartment(x,departmentDb[x])
+
+################################# face embedding calculation ###########################################
+'''
 listEmbedding =[]
 
 for i in range(52):
-    if (i+49) == 87 or (i+49) == 73 or (i+49) == 99 or (i+49) == 97 :
+    if (i+49) == 87 or (i+49) == 73 or (i+49) == 99 or (i+49) == 97 :   #skip dropouts and section AB added students
         continue
     elif i == 51:
         iterator = str(i+49)
@@ -124,24 +138,20 @@ for i in range(52):
 
 #saving data of face embeddings in a text file
 #np.savetxt('embeddingDataCD.txt',listEmbedding,delimiter="\n", fmt="%s")
-
+'''
+file =open('./embeddingDataCD.txt')
+listEmbedding = file.readlines()
+i=0
+j=128
 #################################csv file reading#############################
 # opening the CSV file
 with open('./scraper/PUL075BCTCD.csv', mode ='r') as file:   
         
        # reading the CSV file
        csvFile = csv.DictReader(file)
- 
-       # displaying the contents of the CSV file
+
+       # insert the contents of the CSV file
        for lines in csvFile:
-            print(lines['RollNo'])
-            print(lines['Name'])
-
-for x in subjectBCT:
-    insertdb.insertSubject(x,subjectBCT[x])
-
-for x in classDB:
-    insertdb.insertClass(x,classDB[x])
-
-for x in departmentDb:
-    insertdb.insertDepartment(x,departmentDb[x])
+            insertdb.insertStudent(lines['RollNo'],lines['Name'],"075bctCd","5",listEmbedding[i:j])
+            i=i+128
+            j=j+128

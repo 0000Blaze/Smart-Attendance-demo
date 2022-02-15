@@ -11,12 +11,12 @@ def createdb():
     len_cid = 10
     len_cname = 20
     len_scode = 10
-    len_subname = 30
+    len_subname = 50
     len_did = 10
     len_dname = 100
     len_tid = 10
     len_tname = 50
-    len_sid = 10
+    len_sid = 15
     len_sname = 50
 
     db_query = "CREATE DATABASE {}".format(dbname)
