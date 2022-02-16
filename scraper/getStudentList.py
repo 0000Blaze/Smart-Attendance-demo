@@ -8,6 +8,7 @@ import numpy as np
 
 from recordHandler import splitClasses
 from recordHandler import addNewStudents
+from recordHandler import removeDropouts
 
 url ="http://doece.pcampus.edu.np/index.php/students-bachelor-in-computer-engineering/"
 headers = {"Accept-Language":"en-US,en;q=0.5"}
@@ -69,6 +70,7 @@ records.to_csv('PUL075BCT.csv')
 print("Records retrived and save as PUL075BCT.csv")
 
 try:
+    removeDropouts()
     splitClasses()
     addNewStudents()
 except:

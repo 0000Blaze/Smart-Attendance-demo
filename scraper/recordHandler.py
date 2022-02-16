@@ -3,6 +3,7 @@
 #made to handle the csv file
 #1. split classes AB and CD studnets
 #2. add the new transfer students
+#3. removed dropouts
 
 from itertools import count
 from operator import index
@@ -11,7 +12,7 @@ import pandas as pd
 from csv import writer
 
 def splitClasses():
-    chuck_size = 48
+    chuck_size = 46
     batch_no = 1
     text = "AB"
 
@@ -27,20 +28,20 @@ def splitClasses():
 def addNewStudents():
     #added required students record
     dataAB=[
-        [96,'PUL075BCT097   ','BIBEK BASHYAL'],
-        [98,'PUL075BCT099   ','SAUGAT KAFLE']
+        ['PUL075BCT097   ','BIBEK BASHYAL'],
+        ['PUL075BCT099   ','SAUGAT KAFLE']
     ]
 
     dataCD =[
-        [97,'PUL075BCT098   ','ACHYUT BURLAKOTI'],
-        [99,'PUL075BCT100   ','SIJAL BARAL']
+        ['PUL075BCT098   ','ACHYUT BURLAKOTI'],
+        ['PUL075BCT100   ','SIJAL BARAL']
     ]
 
     data =[
-        [96,'PUL075BCT097   ','BIBEK BASHYAL'],
-        [97,'PUL075BCT098   ','ACHYUT BURLAKOTI'],
-        [98,'PUL075BCT099   ','SAUGAT KAFLE'],
-        [99,'PUL075BCT100   ','SIJAL BARAL']
+        ['PUL075BCT097   ','BIBEK BASHYAL'],
+        ['PUL075BCT098   ','ACHYUT BURLAKOTI'],
+        ['PUL075BCT099   ','SAUGAT KAFLE'],
+        ['PUL075BCT100   ','SIJAL BARAL']
     ]
 
     # Open our existing CSV file for AB class
@@ -63,3 +64,17 @@ def addNewStudents():
         writer_object.writerows(data)
         f_object.close()
     print("Succesful added new students in PUL075BCT\n")
+
+#3 remove drop out students
+def removeDropouts():
+    data = pd.read_csv('PUL075BCT.csv',index_col="RollNo")
+    
+    # dropping passed values
+    data.drop(["PUL075BCT017   ", "PUL075BCT036   ", "PUL075BCT073   ","PUL075BCT087   "], inplace = True)
+    
+    # dropping passed columns
+    data.drop(data.columns[data.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
+
+    # display
+    print("Removed dropouts")
+    data.to_csv('PUL075BCT.csv')
