@@ -108,7 +108,6 @@ departmentDb={
 
 }
 
-
 for x in departmentDb:
     insertdb.insertDepartment(x,departmentDb[x])
 
@@ -139,11 +138,12 @@ for i in range(52):
 #saving data of face embeddings in a text file
 #np.savetxt('embeddingDataCD.txt',listEmbedding,delimiter="\n", fmt="%s")
 '''
+
 file =open('./embeddingDataCD.txt')
 listEmbedding = file.readlines()
 i=0
 j=128
-#################################csv file reading#############################
+#################################csv file reading and insert in student db#############################
 # opening the CSV file
 with open('./scraper/PUL075BCTCD.csv', mode ='r') as file:   
         
@@ -155,3 +155,8 @@ with open('./scraper/PUL075BCTCD.csv', mode ='r') as file:
             insertdb.insertStudent(lines['RollNo'],lines['Name'],"075bctCd","5",listEmbedding[i:j])
             i=i+128
             j=j+128
+
+####################### teaher insertion#############
+
+insertdb.insertTeacher("001","Aman Shakya","5")
+
