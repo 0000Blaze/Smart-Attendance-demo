@@ -22,7 +22,7 @@ i=96
 while i>0:
     if i<10:
         varying_url = "00" + str(i)
-    elif i == 87 or i == 73  or i == 36 or i == 34 or i == 17:   #dropouts 87 73 36 17
+    elif i == 87 or i == 73  or i == 36 or i == 17:   #dropouts 87 73 36 17
         i= i-1
         continue
     else:
