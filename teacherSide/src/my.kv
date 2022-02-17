@@ -31,8 +31,10 @@
 WindowManager:
     MainWindow:
         id:main
-    ClassSelectWindow:
-        id:class_select
+    SubjectSelectWindow:
+        id:subject_select
+    AttendanceControlWindow:
+        id:attendance_control
 
 <MainWindow>:
     name: "main"
@@ -52,7 +54,7 @@ WindowManager:
         rows : 2
 
         BoxLayout:
-            columns: 3
+            columns: 6
             orientation : 'vertical'
             size_hint : 0.7,0.3
                 
@@ -63,19 +65,28 @@ WindowManager:
                 id: teacherId
                 name:"teacherId"
                 hint_text: root.stdTid.field_placeholder
+            
+            Label:
+                text: root.stdClass.field_text
                     
+            TextInput:
+                id: classId
+                name:"classId"
+                hint_text: root.stdClass.field_placeholder            
+            
             Button:
                 id: verifyTeacherId
                 name:"verifyTeacherId"
                 text :"Verify"
                 size_hint : 1,0.8
                 on_release: 
-                    root.stdTid.setTeacherId(app,teacherId)
-                    app.root.current = "bct-cd"
+                    root.stdTid.setTeacherId==(app,teacherId)
+                    root.stdClass.setClassId(app,classId)
+                    app.root.current = "subject-select"
                     root.manager.transition.direction = "left"
 
-<ClassSelectWindow>:
-    name : "bct-cd"
+<SubjectSelectWindow>:
+    name : "subject-select"
 
     AnchorLayout:
         anchor_x:'center'
@@ -126,21 +137,16 @@ WindowManager:
                 anchor_y :'center'
                 
                 BoxLayout:
-                    columns: 3
+                    columns: 1
                     orientation : 'vertical'
                     size_hint : 0.3,0.3
-                    
-                    Label:
-                        id: class_label
-                        text:"Class:"
-                    
-                    TextInput:
-                        id: class_id
-                        multiline: False
                         
                     Button:
                         text :"Start Attendance"
                         size_hint : 1,0.8
+                        on_release:
+                            app.root.current = "attendance-control"
+                            root.manager.transition.direction = "left"
 
             AnchorLayout:
                 anchor_x :'right'  
@@ -194,3 +200,28 @@ WindowManager:
                         size_hint_y: None
                         height: butH/4
                         on_release: dropdown.select('EE')        
+
+<AttendanceControlWindow>:
+    name : "attendance-control"
+
+    AnchorLayout:
+        anchor_x :'left'
+        anchor_y :'top'
+
+        Image:
+            source: "assets/logo.png"
+            size_hint: [None, None]
+            size: [smallImgW,smallImgH]
+    
+    AnchorLayout:
+        anchor_x :'right'
+        anchor_y :'top'
+            
+        Button:
+            id: "back-btn"
+            text: "Go Back"
+            size_hint : [None,None]
+            size : [smallButW,smallButH]    
+            on_release:
+                app.root.current = "subject-select"
+                root.manager.transition.direction = "right"

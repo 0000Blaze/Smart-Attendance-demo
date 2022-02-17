@@ -41,6 +41,13 @@ class TeacherIdInput(Widget):
             print("text empty")
     pass
 
+    def setClassId(self, app, textIp):
+        if textIp != "":
+            app.classId = textIp.text
+            #print(app.classId,textIp.text)
+        else:
+            print("text empty")
+    pass
 
 class MainWindow(Screen):
     stdTid = TeacherIdInput()
@@ -48,6 +55,11 @@ class MainWindow(Screen):
     stdTid.field_text = 'Teacher Id:'
     stdTid.field_placeholder = 'Enter Teacher Id:'
     
+    stdClass = TeacherIdInput()
+    stdClass.field_id = ObjectProperty(None)
+    stdClass.field_text = 'Class Id:'
+    stdClass.field_placeholder = 'Enter Class Id:'
+
     prevColor = [1, 1, 1, 1]
     def buttonPressed(self, btn, recentUsedColor):
         self.prevColor = btn.background_color
@@ -59,9 +71,11 @@ class MainWindow(Screen):
     pass
 
 
-class ClassSelectWindow(Screen):
+class SubjectSelectWindow(Screen):
     pass
 
+class AttendanceControlWindow(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     pass
