@@ -85,16 +85,12 @@ kv = Builder.load_file("my.kv")
 
 
 class TeacherApp(App):
-    # winH = NumericProperty(Window.size[0])
-    # winW = NumericProperty(Window.size[1])
-
+    teacherId =""
+    classId = ""
+    subjects = {}
     def build(self):
         # print(type(self.winH))
         return kv
-
-    # def buttonPressed(self):
-    #     print("Change buttton color for a second?")
-
 
 if __name__ == "__main__":
     TeacherApp().run()
