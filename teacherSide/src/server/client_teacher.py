@@ -3,8 +3,9 @@ import socket
 from typing import final
 from server.communication_json import convert2send, readall
 
+ATTENDANCE_SERVER = {'host': '127.0.0.1', 'port': 60001}
 
-def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, attendance_server):
+def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, attendance_server, student_id = None):
     data = {}
     if teacher_id != None:
         data['tid'] = teacher_id
@@ -12,6 +13,8 @@ def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, a
         data['cid'] = class_id
     if subject_code != None:
         data['scode'] = subject_code
+    if student_id != None:
+        data['sid'] = student_id
     data['attendance'] = attendance_request
     #convert the data to be sent into json format
     datastr = convert2send(data)
@@ -39,29 +42,34 @@ def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, a
         return {'error': 'server not avialable'}
 
 
-def startAttendance(teacher_id, class_id, subject_code, attendance_server={'host': '127.0.0.1', 'port': 60001}):
+def startAttendance(teacher_id, class_id, subject_code):
     response = sendAttendanceData(
-        teacher_id, class_id, 'start', attendance_server)
+        teacher_id, class_id, 'start',ATTENDANCE_SERVER)
     return response
 
 
-def getAttendance(teacher_id, class_id, attendance_server={'host': '127.0.0.1', 'port': 60001}):
+def getAttendance(teacher_id, class_id, attendance_server=ATTENDANCE_SERVER):
     # doesn't require subject to be specified to get attendance
     response = sendAttendanceData(
         teacher_id, class_id, None, 'get', attendance_server)
     return response
 
+def markAttendance(teacher_id, class_id, student_id, attendance_server=ATTENDANCE_SERVER):
+    #explicitly mark a student as present
+    response = sendAttendanceData(
+        teacher_id, class_id, None, 'mark', attendance_server, student_id)
+    return response
 
-def stopAttendance(teacher_id, class_id, attendance_server={'host': '127.0.0.1', 'port': 60001}):
+def stopAttendance(teacher_id, class_id, attendance_server=ATTENDANCE_SERVER):
     # doesn't require subject to be specified to close attendance
     response = sendAttendanceData(
         teacher_id, class_id, None, 'stop', attendance_server)
     return response
 
 
-def updateClassAndSubjects(attendance_server={'host': '127.0.0.1', 'port': 60001}):
+def updateClassAndSubjects(teacher_id, attendance_server=ATTENDANCE_SERVER):
     response = sendAttendanceData(
-        None, None, None, 'update', attendance_server)
+        teacher_id, None, None, 'update', attendance_server)
     return response
 
 

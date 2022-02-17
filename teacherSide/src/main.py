@@ -122,8 +122,9 @@ class TeacherApp(App):
 
     def startAttendanceSheet(self):
         try:
-            AttendanceListFromServer = server.client_teacher.startAttendance(self.teacherId,self.classId,self.subjectId)
+            AttendanceListFromServer = server.client_teacher.startAttendance(self.teacherId, self.classId, self.subjectId)
             print("started attendance with no error")
+            #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
@@ -136,6 +137,7 @@ class TeacherApp(App):
         try:
             AttendanceListFromServer = server.client_teacher.getAttendance(self.teacherId,self.classId)
             print("Refresh update list")
+            #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
@@ -147,6 +149,7 @@ class TeacherApp(App):
         try:
             AttendanceListFromServer = server.client_teacher.stopAttendance(self.teacherId,self.classId)
             print("Stoped attendance and got response")
+            #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:

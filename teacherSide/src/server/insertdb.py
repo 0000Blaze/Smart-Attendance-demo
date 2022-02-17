@@ -88,6 +88,29 @@ def insertTeacher(tid, name, depid):
         print(e)
         return False
 
+def insertIntoTeaches(tid, cid, subcode):
+    if type(subcode) == list:
+        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode[0], classid)
+        for i in range(len(subcode)-1):
+            query += '("{0}","{1}","{2}")'.format(tid, subcode[i+1], classid)
+    else:
+        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode, classid)
+    try:
+        mysqlconn, mycursor = connect2db()
+        try:
+            mycursor.execute(query)
+            mysqlconn.commit()
+            print(f'Added ({tid},{cid},{subcode}) to teaches table')
+            return True
+        except mysql.connector.Error as e:
+            print(e)
+            return False
+        finally:
+            mycursor.close()
+    except mysql.connector.Error as e:
+        print(e)
+        return False
+
 def insertStudent(stuid, name, classid, depid, face_embd):
     if len(face_embd) != 128:
         print('face embeddings size not equal to 128')

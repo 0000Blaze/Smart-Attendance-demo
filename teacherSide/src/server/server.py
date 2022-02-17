@@ -134,8 +134,8 @@ def studentHandler(conn):
                             [numpy.array(facedata)], numpy.array(data['face']))
                         if match[0]:
                             # if face match then update
-                            mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {}'.format(
-                                active_attendance[data['cid']][2])
+                            mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {0} AND sID = "{1}"'.format(
+                                active_attendance[data['cid']][2], data['sid'])
                             mycursor.execute(mark_attendance_query)
                             mysqlconn.commit()
                             # add student_id to students_present[];
@@ -329,10 +329,45 @@ def teacherHandler(conn):
             response['error'] = 'No attendance in progress for the class'
             communication_json.convertSendClose(response, conn)
             return
+    elif data['attendance'] == 'mark':
+        # send list of students whose attendance has been marked
+        if data['cid'] in active_attendance:
+            if active_attendance[data['cid']][0] == data['tid']:
+                # same teacher is only allowed to mark a student present
+                if not data['cid'] in students_present:
+                    try:
+                        mysqlconn, mucursor = connect2db()
+                        mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {0} AND sID = "{1}"'.format(
+                                    active_attendance[data['cid']][2], data['sid'])
+                        try:
+                            mycursor.execute(mark_attendance_query)
+                            mysqlconn.commit()
+                            response['success'] = 'Attendance marked for {data["sid"]}'
+                            communication_json.convertSendClose(response, conn)
+                            return
+                        except mysql.mysql.connector.Error as e:
+                            response['error'] = 'Student ID wrong'
+                            communication_json.convertSendClose(response, conn)
+                            return
+                    except mysql.mysql.connector.Error as e:
+                        sendSQLserverError(conn)
+                        return
+                else:
+                    response['error'] = 'Attendance already marked for {data["sid"]}'
+                    communication_json.convertSendClose(response, conn)
+                    return
+            else:
+                response['error'] = 'Another teacher started attendance for this class'
+                communication_json.convertSendClose(response, conn)
+                return
+        else:
+            response['error'] = 'No attendance in progress for the class'
+            communication_json.convertSendClose(response, conn)
+            return
     elif data['attendance'] == 'update':
         # though the key is 'attendance' it has nothing to do with attendance
         # this just sends updated list of class and subjects to teacher
-        classSubjectUpdater(conn)
+        classSubjectUpdater(conn, data['tid'])
         return
 
 
@@ -349,17 +384,17 @@ def teacherConnectionListen():
 
 
 # class and subject data updater for teacher
-def classSubjectUpdater(conn):
+def classSubjectUpdater(conn, tid):
     data = communication_json.readall(conn)
     response = {}
     try:
         mysqlconn, mycursor = connect2db()
         try:
-            classlist_query = 'SELECT cID, name FROM class WHERE classid != "#"'
+            classlist_query = 'SELECT cID, name FROM class INNER JOIN teaches WHERE tID = {0}'.format(tid)
             mycursor.execute(classlist_query)
             result = mycursor.fetchall()
             response['class'] = result
-            subjectlist_query = 'SELECT scode, name FROM subject WHERE 1'
+            subjectlist_query = 'SELECT scode, name FROM subject INNER JOIN teaches WHERE tID = {0}'.format(tid)
             mycursor.execute(subjectlist_query)
             result = mycursor.fetchall()
             response['subject'] = result
