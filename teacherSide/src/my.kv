@@ -120,26 +120,11 @@ WindowManager:
             AnchorLayout:
                 anchor_x :'center'  
                 anchor_y :'center'
-     
-                BoxLayout:
-                    orientation:'vertical'
-                    columns:2
-                    size_hint : 1,0.2
-
-                    Button:
-                        text: "Update Attendance"
-
-                    Button:
-                        text: "Stop Attendance"
-
-            AnchorLayout:
-                anchor_x :'center'  
-                anchor_y :'center'
                 
                 BoxLayout:
                     columns: 1
                     orientation : 'vertical'
-                    size_hint : 0.3,0.3
+                    size_hint : 0.3,0.1
                         
                     Button:
                         text :"Start Attendance"
@@ -225,3 +210,22 @@ WindowManager:
             on_release:
                 app.root.current = "subject-select"
                 root.manager.transition.direction = "right"
+    
+    AnchorLayout:
+        anchor_x :'center'  
+        anchor_y :'top'
+     
+        BoxLayout:
+            orientation:'horizontal'
+            columns:2
+            size_hint : 0.6,0.25
+
+            Button:
+                size_hint : 1,0.2
+                text: "Update Attendance"
+                font_size : Window.width/40
+
+            Button:
+                size_hint : 1,0.2
+                text: "Stop Attendance"
+                font_size : Window.width/40
