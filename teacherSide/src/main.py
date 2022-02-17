@@ -43,7 +43,7 @@ class TeacherIdInput(Widget):
 
     def setClassId(self, app, textIp):
         if textIp != "":
-            app.classId = textIp.text
+            app.classId = textIp.text.upper()
             print(app.classId,textIp.text)
         else:
             print("text empty")
