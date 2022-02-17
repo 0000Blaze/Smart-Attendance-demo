@@ -17,23 +17,45 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.dropdown import DropDown
 
 from kivy.core.window import Window
-from kivy.properties import NumericProperty, ObjectProperty
+from kivy.properties import NumericProperty, StringProperty,ObjectProperty
 from kivy.utils import platform
 from kivy.clock import mainthread
 from kivy.logger import Logger
 
+class TeacherIdInput(Widget):
+    field_id = ObjectProperty(None)
+    field_text = StringProperty(None)
+    field_placeholder = StringProperty(None)
+
+    def getText(self):
+        return self.field_text
+
+    def getPlaceHolder(self):
+        return self.field_placeholder
+
+    def setTeacherId(self, app, textIp):
+        if textIp != "":
+            app.teacherId = textIp.text
+            #print(app.teacherId,textIp.text)
+        else:
+            print("text empty")
+    pass
+
 
 class MainWindow(Screen):
-
+    stdTid = TeacherIdInput()
+    stdTid.field_id = ObjectProperty(None)
+    stdTid.field_text = 'Teacher Id:'
+    stdTid.field_placeholder = 'Enter Teacher Id:'
+    
     prevColor = [1, 1, 1, 1]
-
-    # textTest = ObjectProperty(None)
     def buttonPressed(self, btn, recentUsedColor):
         self.prevColor = btn.background_color
         btn.background_color = recentUsedColor
 
     def exitingButtonPress(self, btn):
         btn.background_color = self.prevColor
+
     pass
 
 

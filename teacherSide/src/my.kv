@@ -36,47 +36,43 @@ WindowManager:
 
 <MainWindow>:
     name: "main"
-
     AnchorLayout:
-        anchor_x:'center'
-        anchor_y:'center'
-        rows:3
+        anchor_x :'center'
+        anchor_y :'top'
 
-        AnchorLayout:
-            anchor_x :'center'
-            anchor_y :'top'
-
-            Image:
-                source: "assets/logo.png"
-                size_hint: [None, None]
-                size: [mainImgW,mainImgH]
+        Image:
+            source: "assets/logo.png"
+            size_hint: [None, None]
+            size: [mainImgW,mainImgH]
         
 
-        AnchorLayout:
-            anchor_x :'center'
-            anchor_y :'center'
+    AnchorLayout:
+        anchor_x :'center'
+        anchor_y :'center'
+        rows : 2
 
-            BoxLayout:
-                columns: 3
-                orientation : 'vertical'
-                size_hint : 0.7,0.3
+        BoxLayout:
+            columns: 3
+            orientation : 'vertical'
+            size_hint : 0.7,0.3
                 
-                Label:
-                    id: t_id
-                    text:"Teacher ID:"
-                
-                TextInput:
-                    id: teacherId
-                    multiline: False
+            Label:
+                text: root.stdTid.field_text
+
+            TextInput:
+                id: teacherId
+                name:"teacherId"
+                hint_text: root.stdTid.field_placeholder
                     
-                Button:
-                    name:"verify"
-                    text :"Verify"
-                    
-                    size_hint : 1,0.8
-                    on_release: 
-                        app.root.current = "bct-cd"
-                        root.manager.transition.direction = "left"
+            Button:
+                id: verifyTeacherId
+                name:"verifyTeacherId"
+                text :"Verify"
+                size_hint : 1,0.8
+                on_release: 
+                    root.stdTid.setTeacherId(app,teacherId)
+                    app.root.current = "bct-cd"
+                    root.manager.transition.direction = "left"
 
 <ClassSelectWindow>:
     name : "bct-cd"
