@@ -7,10 +7,10 @@ title = Teacher smart Attendance
 package.name = teacherside
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = com.github.kivy
 
 # (str) Source code where the main.py live
-source.dir = .
+source.dir = src
 
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas
@@ -36,7 +36,10 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements =
+    android,
+    kivy,
+    python3
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -85,23 +88,22 @@ fullscreen = 0
 #android.presplash_color = #FFFFFF
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAG,READ_EXTERNAL_STORAG
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 27
+android.api = 27
 
 # (int) Minimum API your APK will support.
-#android.minapi = 21
+android.minapi = 21
 
 # (int) Android SDK version to use
-#android.sdk = 20
+android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 19b
+android.ndk = 19b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
-#android.ndk_api = 21
-
+android.ndk_api = 21
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
 
@@ -123,7 +125,7 @@ fullscreen = 0
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-# android.accept_sdk_license = False
+android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
@@ -233,7 +235,7 @@ android.arch = armeabi-v7a
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-#p4a.branch = master
+p4a.branch = develop
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #p4a.source_dir =

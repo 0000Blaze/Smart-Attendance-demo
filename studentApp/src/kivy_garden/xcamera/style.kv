@@ -17,10 +17,18 @@
 #:set labelH 0.15
 #:set labelW 0.4
 
+#:set angleV 0
+#app.root is WindowManager
                 
 WindowManager:
     MainWindow:
+        id:main
     CameraWindow:
+        id:camera
+    DataProcessingWindow:
+        id:datap
+    AlertWindow:
+        id:alert
 
 
 
@@ -42,7 +50,7 @@ WindowManager:
         rows : 2
         
         BoxLayout:
-            columns: 3
+            columns: 6
             orientation : 'vertical'
             size_hint : 0.7,0.3
             Label:
@@ -54,6 +62,13 @@ WindowManager:
                 name :"tinp"
                 hint_text: root.stdRoll.field_placeholder
                 #size_hint : labelW,labelH
+            Label:
+                text: root.stdAcode.field_text
+            TextInput:
+                id: acodeinp
+                #name :"tinp"
+                hint_text: root.stdAcode.field_placeholder
+                #size_hint : labelW,labelH
                 
             Button:
                 id: verifyRoll
@@ -62,18 +77,33 @@ WindowManager:
                 
                 #size_hint : labelW,labelH
                 on_release: 
-                    root.stdRoll.process(tinp)
+                    root.stdRoll.setRollNo(app,tinp)
+                    root.stdAcode.setACode(app,acodeinp)
                     app.root.current = "camera"
                     root.manager.transition.direction = "left"
-            
+                    app.root.ids.camera.setIndex()
+            Button:
+                id: verifyRoll
+                name:"verifyRoll"
+                text : "Verify2"
+                
+                #size_hint : labelW,labelH
+                on_release: 
+                    root.stdRoll.setRollNo(app,tinp)
+                    root.stdAcode.setACode(app,acodeinp)
+                    app.root.current = "camera"
+                    root.manager.transition.direction = "left"
+                    app.root.ids.camera.setIndex2()
                 
 
                 
 <CameraWindow>:
     name:"camera"
+    id:camera
     BoxLayout:
         orientation : 'vertical'
         rows : 2
+        id : "outerBox"
         BoxLayout:
             size : 200,200
             orientation : 'horizontal'
@@ -100,20 +130,56 @@ WindowManager:
                     on_release:
                         app.root.current = "main"
                         root.manager.transition.direction = "right"
+                        
         BoxLayout:
             orientation:'vertical'
             XCamera:
                 id:xcamera
-                index:0                         #1 for apk buildeing to access the selfi camera
+                
+                #index: 0
                 resolution: (640,480)
                 play: True
                 size_hint: 1,1
                 allow_stretch: True
+                on_picture_taken: app.picture_taken(*args)
                 canvas.before:
                     PushMatrix
                     Rotate:
-                        #angle: 90                 #uncomment before apk dev for non rotated image
+                        angle: angleV 
                         origin: self.center
                 canvas.after:
                     PopMatrix
+            Button:
+                text:"Capture"
+                on_release : 
+                    xcamera.shoot(app.rollNo)
+                    app.root.current = "datap" if app.saveSuccess else "alert"
+                    root.manager.transition.direction = "left"
+                    root.setStatusLabel(app.root.ids.datap.ids.successLabel)
+                    # app.root.ids.datap.ids.successLabel.text = app.encodingsString()
 
+                size_hint : 0.2,0.2
+<DataProcessingWindow>:
+    name :"datap"
+    AnchorLayout:
+
+        anchor_x :'right'
+        anchor_y :'top'
+                    
+        Button:
+            id: "back-btn"
+            text: "Go Back"
+            size_hint : [None,None]
+            size : [smallButW,smallButH]
+            on_release:
+                app.root.current = "camera"
+                root.manager.transition.direction = "right"
+        Label:
+            id : successLabel
+            text : "Success!"
+            
+                
+
+<AlertWindow>:
+    name :"alert"
+    

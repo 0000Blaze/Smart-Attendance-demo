@@ -1,5 +1,9 @@
 import datetime
+import encodings
 import os
+
+import cv2
+import face_recognition
 
 from kivy.clock import mainthread
 from kivy.lang import Builder
@@ -24,8 +28,10 @@ def darker(color, factor=0.5):
     return r, g, b, a
 
 
-def get_filename():
-    return datetime.datetime.now().strftime('%Y-%m-%d %H.%M.%S.jpg')
+def get_filename(rollNo):
+    # print (rollNo)
+    temp =  datetime.datetime.now().strftime('%Y-%m-%d+%H-%M-%S.jpg')
+    return rollNo + "+"+temp
 
 
 def is_android():
@@ -53,10 +59,6 @@ def check_request_camera_permission(callback=None):
         permissions = [Permission.CAMERA]
         request_permissions(permissions, callback)
     return had_permission
-
-
-class XCameraIconButton(ButtonBehavior, Label):
-    pass
 
 
 class XCamera(Camera):
@@ -95,6 +97,11 @@ class XCamera(Camera):
         """
         This event is fired every time a picture has been taken.
         """
+        # imag = face_recognition.load_image_file(filename)
+        # imag = cv2.cvtColor(imag, cv2.COLOR_BGR2RGB)
+        # encodingsData = face_recognition.face_encodings(imag)[0]
+        # print(encodingsData)
+        # os.remove(filename)
         pass
 
     def on_camera_ready(self):
@@ -103,10 +110,10 @@ class XCamera(Camera):
         """
         pass
 
-    def shoot(self):
+    def shoot(self,rollNo):
         def on_success(filename):
             self.dispatch('on_picture_taken', filename)
-        filename = get_filename()
+        filename = get_filename(rollNo)
         if self.directory:
             filename = os.path.join(self.directory, filename)
         take_picture(self, filename, on_success)

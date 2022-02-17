@@ -1,5 +1,7 @@
 #:import xcamera kivy_garden.xcamera.xcamera
 
+
+
 <XCameraIconButton>
     icon_color: (0, 0, 0, 1)
     _down_color: xcamera.darker(self.icon_color)
@@ -24,19 +26,18 @@
     icon_size: dp(70)
 
     id: camera
-    index:1
-    resolution: 640,480
-    allow_stretch: False
-
+    index:0
+    resolution: 640, 480 # 1920, 1080
+    allow_stretch: True
     # Shoot button
-    XCameraIconButton:
-        id: shoot_button
-        markup: True
-        text: root.icon
-        icon_color: root.icon_color
-        icon_size: root.icon_size
-        on_release: root.shoot()
+    # XCameraIconButton:
+    #     id: shoot_button
+    #     markup: True
+    #     text: root.icon
+    #     icon_color: root.icon_color
+    #     icon_size: root.icon_size
+    #     on_release: root.shoot()
 
-        # position
-        right: root.width - dp(10)
-        center_y: root.center_y
+    #     # position
+    #     right: root.width + dp(1)
+    #     center_y: root.center_y
