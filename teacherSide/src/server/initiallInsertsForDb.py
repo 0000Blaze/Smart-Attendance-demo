@@ -75,24 +75,24 @@ for x in subjectBCT:
 
 ##########################################class insertion##############################
 classDB={
-    "074bctAb":"074bctAb",
-    "074bexAb":"074bexAb",
-    "074belAb":"074belAb",
+    "074BCTAB":"074BCTAB",
+    "074BEXAB":"074BEXAB",
+    "074BELAB":"074BELAB",
 
-    "075bctAb":"075bctAb",
-    "075bctCd":"075bctCd",
-    "075bexAb":"075bexAb",
-    "075belAb":"075belAb",
+    "075BCTAB":"075BCTAB",
+    "075BCTCD":"075BCTCD",
+    "075BEXAB":"075BEXAB",
+    "075BELAB":"075BELAB",
 
-    "076bctAb":"076bctAb",
-    "076bctCd":"076bctCd",
-    "076bexAb":"076exAb",
-    "076belAb":"076belAb",
+    "076BCTAB":"076BCTAB",
+    "076BCTCD":"076BCTCD",
+    "076BEXAB":"076BEXAB",
+    "076BELAB":"076BELAB",
 
-    "077bctAb":"077bctAb",
-    "077bctCd":"077bctCd",
-    "077bexAb":"077bexAb",
-    "077belAb":"077belAb"
+    "077BCTAB":"077BCTAB",
+    "077BCTCD":"077BCTCD",
+    "077BEXAB":"077BEXAB",
+    "077BELAB":"077BELAB"
 }
 
 for x in classDB:
@@ -139,20 +139,20 @@ for i in range(52):
 #np.savetxt('embeddingDataCD.txt',listEmbedding,delimiter="\n", fmt="%s")
 '''
 
-file =open('./embeddingDataCD.txt')
+file =open('embeddingDataCD.txt')
 listEmbedding = file.readlines()
 i=0
 j=128
 #################################csv file reading and insert in student db#############################
 # opening the CSV file
-with open('./scraper/PUL075BCTCD.csv', mode ='r') as file:   
+with open('PUL075BCTCD.csv', mode ='r') as file:   
         
        # reading the CSV file
        csvFile = csv.DictReader(file)
 
        # insert the contents of the CSV file
        for lines in csvFile:
-            insertdb.insertStudent(lines['RollNo'],lines['Name'],"075bctCd","5",listEmbedding[i:j])
+            insertdb.insertStudent(lines['RollNo'],lines['Name'],"075BCTCD","5",listEmbedding[i:j])
             i=i+128
             j=j+128
 
