@@ -88,6 +88,29 @@ def insertTeacher(tid, name, depid):
         print(e)
         return False
 
+def insertIntoTeaches(tid, cid, subcode):
+    if type(subcode) == list:
+        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode[0], classid)
+        for i in range(len(subcode)-1):
+            query += '("{0}","{1}","{2}")'.format(tid, subcode[i+1], classid)
+    else:
+        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode, classid)
+    try:
+        mysqlconn, mycursor = connect2db()
+        try:
+            mycursor.execute(query)
+            mysqlconn.commit()
+            print(f'Added ({tid},{cid},{subcode}) to teaches table')
+            return True
+        except mysql.connector.Error as e:
+            print(e)
+            return False
+        finally:
+            mycursor.close()
+    except mysql.connector.Error as e:
+        print(e)
+        return False
+
 def insertStudent(stuid, name, classid, depid, face_embd):
     if len(face_embd) != 128:
         print('face embeddings size not equal to 128')
@@ -157,15 +180,15 @@ def insertRecord(aid, stuid, presence):
 
 def insertRecords(aid, stuids, presences = None):
     if presences == None:
-        presences = [False for x in range(len(studids))]
+        presences = [False for x in range(len(stuids))]
     elif len(stuids) != len(presences):
         print('Size of student and presence list not equal')
         return False
     #save attendance records for multiple students in single query
     query = 'INSERT INTO record(aID, sID, presence) VALUES({0},"{1}",{2})'.format(aid, stuids[0], presences[0])
     for i in range(len(stuids)-1): #first value already in query string as it shouldn't have comma at begining
-        newrow = ',({0}, {1}, {2})'.format(aid, stuids[i+1], presences[i+1])
-        face_query += newrow
+        newrow = ',({0}, "{1}", {2})'.format(aid, stuids[i+1], presences[i+1])
+        query += newrow
     try:
         mysqlconn, mycursor = connect2db()
         try:
