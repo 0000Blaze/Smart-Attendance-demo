@@ -1,9 +1,12 @@
 import json
 import socket
 from typing import final
-from server.communication_json import convert2send, readall
+from server import communication_json
+
+#from communication_json import convert2send, readall
 
 ATTENDANCE_SERVER = {'host': '127.0.0.1', 'port': 60001}
+SERVER_TIMEOUT = 30 #timeout after 20 seconds if server didn't respond
 
 def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, attendance_server, student_id = None):
     data = {}
@@ -17,11 +20,12 @@ def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, a
         data['sid'] = student_id
     data['attendance'] = attendance_request
     #convert the data to be sent into json format
-    datastr = convert2send(data)
+    datastr = communication_json.convert2send(data)
     #print(datastr)
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
+        sock.settimeout(SERVER_TIMEOUT)
         sock.connect((attendance_server['host'], attendance_server['port']))
         try:
             #sending attendance start data to server
@@ -44,7 +48,7 @@ def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, a
 
 def startAttendance(teacher_id, class_id, subject_code):
     response = sendAttendanceData(
-        teacher_id, class_id, 'start',ATTENDANCE_SERVER)
+        teacher_id, class_id,subject_code, 'start',ATTENDANCE_SERVER)
     return response
 
 
@@ -63,7 +67,7 @@ def markAttendance(teacher_id, class_id, student_id, attendance_server=ATTENDANC
 def stopAttendance(teacher_id, class_id, attendance_server=ATTENDANCE_SERVER):
     # doesn't require subject to be specified to close attendance
     response = sendAttendanceData(
-        teacher_id, class_id, None, 'stop', attendance_server)
+        teacher_id, class_id, None, 'end', attendance_server)
     return response
 
 

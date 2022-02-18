@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+
+from server import client_teacher
 import kivy
 from numpy import datetime_data
 
-import server.client_teacher
 import os
 import imp
 from kivy.app import App
@@ -116,46 +117,49 @@ class TeacherApp(App):
     teacherId =""
     classId = ""
     subjectId = ""
+    
     def build(self):
         # print(type(self.winH))
         return kv
 
     def startAttendanceSheet(self):
         try:
-            AttendanceListFromServer = server.client_teacher.startAttendance(self.teacherId, self.classId, self.subjectId)
-            print("started attendance with no error")
+            AttendanceListFromServer = client_teacher.startAttendance(self.teacherId, self.classId, self.subjectId)
+            #print("started attendance with no error")
             #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
-                print(AttendanceListFromServer["success"])
+                print(AttendanceListFromServer["acode"])
+                print(AttendanceListFromServer["student_list"])
+                print(AttendanceListFromServer["timeout"])
         except Exception as e:
             print("error :", e)
 
 
     def updateAttendanceSheet(self):
         try:
-            AttendanceListFromServer = server.client_teacher.getAttendance(self.teacherId,self.classId)
-            print("Refresh update list")
+            AttendanceListFromServer = client_teacher.getAttendance(self.teacherId,self.classId)
+            #print("Refresh update list")
             #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
-                print(AttendanceListFromServer["success"])
+                print(AttendanceListFromServer["student_list"])
         except Exception as e:
-            print("error :", e)
+            print(e)
 
     def finalAttendanceSheet(self):
         try:
-            AttendanceListFromServer = server.client_teacher.stopAttendance(self.teacherId,self.classId)
-            print("Stoped attendance and got response")
+            AttendanceListFromServer = client_teacher.stopAttendance(self.teacherId,self.classId)
+            #print("Stoped attendance and got response")
             #print(AttendanceListFromServer)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
                 print(AttendanceListFromServer["success"])
         except Exception as e:
-            print("error :", e)
+            print(e)
 
 
 if __name__ == "__main__":

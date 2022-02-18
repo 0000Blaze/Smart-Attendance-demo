@@ -3,6 +3,7 @@ import socket
 import server.communication_json as communication_json
 
 attendance_server = {'host': '127.0.0.1', 'port': 60000}
+SERVER_TIMEOUT = 30 #timeout after 20 seconds if server didn't respond
 
 
 def markAttendance(student_id, acode, face_embd, _attendance_server=attendance_server):
@@ -16,6 +17,7 @@ def markAttendance(student_id, acode, face_embd, _attendance_server=attendance_s
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
+        sock.settimeout(SERVER_TIMEOUT)
         sock.connect((attendance_server['host'], attendance_server['port']))
         # print("zxc ")
         try:

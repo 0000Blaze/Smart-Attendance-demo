@@ -12,6 +12,7 @@ import communication_json
 import insertdb
 import utility
 
+
 MAX_ACODE = 1000
 
 # server info
@@ -28,7 +29,7 @@ dbinfo = {'host': 'localhost',
           'database': 'sas'}
 
 # attendance closes automatically after 10 minutes if teacher doesn't close it
-ATTENDANCE_TIMEOUT = 10 * 60
+ATTENDANCE_TIMEOUT = 1 * 60
 ATTENDANCE_TIMEOUT_CHECK = 10  # checks every 10 seconds for timeout of attendance
 attendance_scheduler = sched.scheduler(time.time, time.sleep)
 
@@ -161,6 +162,8 @@ def studentHandler(conn):
 def studentConnectionListen():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sl:
         sl.bind((server_ip, student_port))
+        sl.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        
         while(True):
             sl.listen()
             conn, addr = sl.accept()
@@ -184,6 +187,7 @@ def attendanceTimeout():
             time.sleep(ATTENDANCE_TIMEOUT_CHECK)
         else:
             attendance_scheduler.run()
+        
 
 
 # def teacherAttendanceLogFeedback(conn, class_id):
@@ -285,8 +289,8 @@ def teacherHandler(conn):
                             result = mycursor.fetchall()
                             response['student_list'] = result
                             response['acode'] = acode
-                            response['timeout'] = 'The attendance will close automatically in {} minoutes if not explicitly closed'.format(
-                                TIMEOUT_ATTENDANCE)
+                            response['timeout'] = 'The attendance will close automatically in {} minutes if not explicitly closed'.format(
+                                ATTENDANCE_TIMEOUT/60)
                             communication_json.convertSendClose(response, conn)
                             sidlist = [r[0] for r in result]
 
@@ -305,12 +309,12 @@ def teacherHandler(conn):
                                 ATTENDANCE_TIMEOUT, 0, removeClassFromAttendance, argument=(data['cid'],))
                             # --- start new thread for attendance log feedback  --- not applicable now
                             # --- wait for attendance stop message from teacher client  --- not applicable now
-            except mysql.mysql.connector.Error as e:
+            except mysql.connector.Error as e:
                 sendSQLserverError(conn)
                 return
             finally:
                 mycursor.close()
-        except mysql.mysql.connector.Error as e:
+        except mysql.connector.Error as e:
             sendSQLserverError(conn)
             return
     elif data['attendance'] == 'get':
@@ -318,7 +322,7 @@ def teacherHandler(conn):
         if data['cid'] in active_attendance:
             if active_attendance[data['cid']][0] == data['tid']:
                 # same teacher is only allowed to see realtime attendance data
-                response['student_list'] = students_present[data['tid']]
+                response['student_list'] = students_present[data['cid']]
                 communication_json.convertSendClose(response, conn)
                 return
             else:
@@ -374,6 +378,8 @@ def teacherHandler(conn):
 def teacherConnectionListen():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((server_ip, teacher_port))
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+      
         while(True):
             s.listen()
             conn, addr = s.accept()
@@ -436,14 +442,15 @@ if __name__ == '__main__':
 
     teacherlistener.start()  # listen and handle teacher clients
     studentlistener.start()  # listen and handle student clients
-    # stop any attendance that has not been stopped explicitly by teacher within timeout period
-    attendancetimer.start()
+    attendancetimer.start()  # stop any attendance that has not been stopped explicitly by teacher within timeout period
+
+    while True:
+        endServer = input()
+        if endServer == "q" or endServer =="Q":
+            sys.exit()
 
     # wait till all threads have returned
     # teacherlistener.join()
     # studentlistener.join()
     # attendancetimer.join()
-    while True:
-        endServer = input()
-        if endServer == "q" or endServer =="Q":
-            sys.exit()
+    
