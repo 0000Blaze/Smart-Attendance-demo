@@ -26,7 +26,18 @@
     background_color : backgroundColor
     size_hint : 0.3,0.1
     
-
+<AttendanceLabel>:
+    font_size: 15
+    size_hint_y:None
+    height: 30
+    text_size: self.size
+    valign: 'middle'
+    canvas.before:
+        Color:
+            rgb: .6, .6, .6
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 WindowManager:
     MainWindow:
@@ -237,7 +248,16 @@ WindowManager:
     AnchorLayout:
         anchor_x :'center'  
         anchor_y :'top'
-     
+
+        BoxLayout:
+            orientation:'vertical'
+            columns:1
+            size_hint : 0.6,0.25
+
+            Label:
+                id: attendance_code
+                text: root.attendanceCode.field_text
+        
         BoxLayout:
             orientation:'horizontal'
             columns:2
@@ -249,6 +269,7 @@ WindowManager:
                 font_size : Window.width/40
                 on_release:
                     app.updateAttendanceSheet()
+                    root.setAttendanceCode()
 
             Button:
                 size_hint : 1,0.2
