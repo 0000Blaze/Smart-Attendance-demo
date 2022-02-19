@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import GlobalShared
 import abc
 from server import client_teacher
 import kivy
@@ -34,14 +34,18 @@ class TeacherIdInput(Widget):
     def setTeacherId(self, app, textIp):
         if textIp != "":
             app.teacherId = textIp.text
-            print(app.teacherId,textIp.text)
+            #print(app.teacherId,textIp.text)
+            GlobalShared.teacherId = app.teacherId
+            print(GlobalShared.teacherId)
         else:
             print("text empty")
     pass
     def setClassId(self, app, textIp):
         if textIp != "":
             app.classId = textIp.text.upper()
-            print(app.classId,textIp.text)
+            #print(app.classId,textIp.text)
+            GlobalShared.classId = app.classId
+            print(GlobalShared.classId)
         else:
             print("text empty")
     pass
@@ -54,7 +58,9 @@ class SubjectSelect(Widget):
     def setSubjectCode(self, app, textIp):
         if textIp != "":
             app.subjectId = textIp
-            print(app.subjectId)
+            #print(app.subjectId)
+            GlobalShared.subjectId = app.subjectId
+            print(GlobalShared.subjectId)
         else:
             print("text empty")
     pass
@@ -62,10 +68,14 @@ class SubjectSelect(Widget):
     
 #attendance code class
 class AttendanceDetail(Widget):
-    field_AttendanceId = StringProperty(None)
-    field_teacherId = StringProperty(None)
-    field_classId = StringProperty(None)
-    field_subjectId = StringProperty(None)
+
+    def setAttendanceId(self):
+        print(type(GlobalShared.attendanceId))
+        try:
+            self.ids.attendance_code = GlobalShared.attendanceId
+            print(self.ids.attendance_code,GlobalShared.attendanceId)
+        except:
+            print("attendance code error")
     pass
 
 ''' ############################################### Classes for kivy windows ############################################### '''
@@ -100,26 +110,25 @@ class SubjectSelectWindow(Screen):
 
     def startAttendanceSheet(self):
         try:
-            AttendanceListFromServer = client_teacher.startAttendance(self.teacherId, self.classId, self.subjectId)
+            AttendanceListFromServer = client_teacher.startAttendance(GlobalShared.teacherId, GlobalShared.classId, GlobalShared.subjectId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
                 #save attendance code
-                TeacherApp.attendanceId = AttendanceListFromServer["acode"]
+                GlobalShared.attendanceId = AttendanceListFromServer["acode"]
                 for list in AttendanceListFromServer["student_list"]:
                     print(list[0], list[1])
                 print(AttendanceListFromServer["timeout"])
-                print(TeacherApp.attendanceId)
+                print(GlobalShared.attendanceId)
         except Exception as e:
             print("error :", e)
 
 class AttendanceControlWindow(Screen):
     attendanceInstance = AttendanceDetail()        
-    attendanceInstance.field_AttendanceId = 'No attendance code'
     
     def updateAttendanceSheet(self):
         try:
-            AttendanceListFromServer = client_teacher.getAttendance(self.teacherId,self.classId)
+            AttendanceListFromServer = client_teacher.getAttendance(GlobalShared.teacherId,GlobalShared.classId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
@@ -129,7 +138,7 @@ class AttendanceControlWindow(Screen):
 
     def finalAttendanceSheet(self):
         try:
-            AttendanceListFromServer = client_teacher.stopAttendance(self.teacherId,self.classId)
+            AttendanceListFromServer = client_teacher.stopAttendance(GlobalShared.teacherId,GlobalShared.classId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
@@ -144,10 +153,6 @@ kv = Builder.load_file("my.kv")
 
 
 class TeacherApp(App):
-    teacherId =""
-    classId = ""
-    subjectId = ""
-    attendanceId =""
     
     def build(self): 
         return kv
