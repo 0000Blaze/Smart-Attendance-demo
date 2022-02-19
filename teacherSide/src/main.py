@@ -24,7 +24,7 @@ from kivy.properties import NumericProperty, StringProperty,ObjectProperty
 from kivy.utils import platform
 from kivy.clock import mainthread
 
-''' classes for various data to and fro from kv and python side '''
+''' ############################# classes for various data to and fro from kv and python side ############################### '''
 #teacher id input class
 class TeacherIdInput(Widget):
     field_id = ObjectProperty(None)
@@ -38,7 +38,6 @@ class TeacherIdInput(Widget):
         else:
             print("text empty")
     pass
-    
     def setClassId(self, app, textIp):
         if textIp != "":
             app.classId = textIp.text.upper()
@@ -62,12 +61,14 @@ class SubjectSelect(Widget):
     
     
 #attendance code class
-class AttendanceCode(Widget):
-    field_id = ObjectProperty(None)
-    field_text = StringProperty(None)
-    
+class AttendanceDetail(Widget):
+    field_AttendanceId = StringProperty(None)
+    field_teacherId = StringProperty(None)
+    field_classId = StringProperty(None)
+    field_subjectId = StringProperty(None)
     pass
-'''      Classes for kivy windows   '''
+
+''' ############################################### Classes for kivy windows ############################################### '''
 class MainWindow(Screen):
     stdTid = TeacherIdInput()
     stdTid.field_id = ObjectProperty(None)
@@ -91,7 +92,6 @@ class MainWindow(Screen):
 
     pass
 
-
 class SubjectSelectWindow(Screen):
     stdSid = SubjectSelect()
     stdSid.field_id = ObjectProperty(None)
@@ -113,11 +113,9 @@ class SubjectSelectWindow(Screen):
         except Exception as e:
             print("error :", e)
 
-
 class AttendanceControlWindow(Screen):
-    attendanceCode = AttendanceCode()
-    attendanceCode.field_id = ObjectProperty(None)        
-    attendanceCode.field_text = 'No attendance code'
+    attendanceInstance = AttendanceDetail()        
+    attendanceInstance.field_AttendanceId = 'No attendance code'
     
     def updateAttendanceSheet(self):
         try:
@@ -138,8 +136,7 @@ class AttendanceControlWindow(Screen):
                 print(AttendanceListFromServer["success"])
         except Exception as e:
             print(e)
-
-
+''' ############################################### Kivy App builder ################################################ '''
 class WindowManager(ScreenManager):
     pass
 

@@ -243,7 +243,7 @@ WindowManager:
 
             Label:
                 id: attendance_code
-                text: root.attendanceCode.field_text
+                text: root.attendanceInstance.field_AttendanceId
         
         BoxLayout:
             orientation:'horizontal'
@@ -256,7 +256,6 @@ WindowManager:
                 font_size : Window.width/40
                 on_release:
                     root.updateAttendanceSheet()
-                    root.setAttendanceCode(app)
 
             Button:
                 size_hint : 1,0.2
