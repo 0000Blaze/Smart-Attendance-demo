@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import abc
 from server import client_teacher
 import kivy
 from numpy import datetime_data
@@ -37,6 +38,7 @@ class TeacherIdInput(Widget):
         else:
             print("text empty")
     pass
+    
     def setClassId(self, app, textIp):
         if textIp != "":
             app.classId = textIp.text.upper()
@@ -57,16 +59,15 @@ class SubjectSelect(Widget):
         else:
             print("text empty")
     pass
-
+    
+    
 #attendance code class
 class AttendanceCode(Widget):
     field_id = ObjectProperty(None)
     field_text = StringProperty(None)
+    
     pass
 '''      Classes for kivy windows   '''
-class AttendanceLabel(Label):
-    pass
-
 class MainWindow(Screen):
     stdTid = TeacherIdInput()
     stdTid.field_id = ObjectProperty(None)
@@ -97,34 +98,6 @@ class SubjectSelectWindow(Screen):
     stdSid.field_text = 'Subject Id:'
     pass
 
-class AttendanceControlWindow(Screen):
-    attendanceCode = AttendanceCode()
-    attendanceCode.field_id = ObjectProperty(None)        
-    attendanceCode.field_text = 'No attendance code'
-    def setAttendanceCode(self):
-        try:
-            self.ids.attendance_code.text = TeacherApp.attendanceId
-            print("hi",self.ids.attendance_code.text,TeacherApp.attendanceId)
-        except:
-            print("error")    
-
-class WindowManager(ScreenManager):
-    pass
-
-kv = Builder.load_file("my.kv")
-
-
-class TeacherApp(App):
-    teacherId =""
-    classId = ""
-    subjectId = ""
-    attendanceId =""
-
-    
-    def build(self):
-        # print(type(self.winH))
-        return kv
-
     def startAttendanceSheet(self):
         try:
             AttendanceListFromServer = client_teacher.startAttendance(self.teacherId, self.classId, self.subjectId)
@@ -133,22 +106,19 @@ class TeacherApp(App):
             else:
                 #save attendance code
                 TeacherApp.attendanceId = AttendanceListFromServer["acode"]
-                print(TeacherApp.attendanceId)
-                #save and display records
-                #layout = self.ids['attendanceList']
                 for list in AttendanceListFromServer["student_list"]:
                     print(list[0], list[1])
-                    #lab1 = AttendanceLabel(text=str(list[0]),size_hint_x=.35, halign='left' )
-                    #lab2 = AttendanceLabel(text=str(list[1]),size_hint_x=.15, halign='right' )
-                    #layout.add_widget(lab1)
-                    #layout.add_widget(lab2)
-                #print(type(AttendanceListFromServer["student_list"]))
                 print(AttendanceListFromServer["timeout"])
                 print(TeacherApp.attendanceId)
         except Exception as e:
             print("error :", e)
 
 
+class AttendanceControlWindow(Screen):
+    attendanceCode = AttendanceCode()
+    attendanceCode.field_id = ObjectProperty(None)        
+    attendanceCode.field_text = 'No attendance code'
+    
     def updateAttendanceSheet(self):
         try:
             AttendanceListFromServer = client_teacher.getAttendance(self.teacherId,self.classId)
@@ -169,6 +139,21 @@ class TeacherApp(App):
         except Exception as e:
             print(e)
 
+
+class WindowManager(ScreenManager):
+    pass
+
+kv = Builder.load_file("my.kv")
+
+
+class TeacherApp(App):
+    teacherId =""
+    classId = ""
+    subjectId = ""
+    attendanceId =""
+    
+    def build(self): 
+        return kv
 
 if __name__ == "__main__":
     TeacherApp().run()

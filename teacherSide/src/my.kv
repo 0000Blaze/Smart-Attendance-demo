@@ -26,19 +26,6 @@
     background_color : backgroundColor
     size_hint : 0.3,0.1
     
-<AttendanceLabel>:
-    font_size: 15
-    size_hint_y:None
-    height: 30
-    text_size: self.size
-    valign: 'middle'
-    canvas.before:
-        Color:
-            rgb: .6, .6, .6
-        Rectangle:
-            pos: self.pos
-            size: self.size
-
 WindowManager:
     MainWindow:
         id:main
@@ -141,7 +128,7 @@ WindowManager:
                         text :"Start Attendance"
                         size_hint : 1,0.8
                         on_release:
-                            app.startAttendanceSheet()
+                            root.startAttendanceSheet()
                             app.root.current = "attendance-control"
                             root.manager.transition.direction = "left"
 
@@ -268,12 +255,12 @@ WindowManager:
                 size_hint : 1,0.2
                 font_size : Window.width/40
                 on_release:
-                    app.updateAttendanceSheet()
-                    root.setAttendanceCode()
+                    root.updateAttendanceSheet()
+                    root.setAttendanceCode(app)
 
             Button:
                 size_hint : 1,0.2
                 text: "Stop Attendance"
                 font_size : Window.width/40
                 on_release:
-                    app.finalAttendanceSheet()
+                    root.finalAttendanceSheet()
