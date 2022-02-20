@@ -68,14 +68,16 @@ class SubjectSelect(Widget):
     
 #attendance code class
 class AttendanceDetail(Widget):
-
+    field_AttendanceId = StringProperty(None)
     def setAttendanceId(self):
-        print(type(GlobalShared.attendanceId))
         try:
-            self.ids.attendance_code = GlobalShared.attendanceId
-            print(self.ids.attendance_code,GlobalShared.attendanceId)
+            self.field_AttendanceId = "Attendance code: " + str(GlobalShared.attendanceId)
+            print(self.field_AttendanceId)
+            #app = App.get_running_app()
+            #self.attendance_control.ids.anchor_attendance_code.ids.box_attendance_code.ids.attendance_code.text = GlobalShared.attendanceId
+            #print(self.attendance_control.ids.anchor_attendance_code.ids.box_attendance_code.ids.attendance_code.text ,GlobalShared.attendanceId)
         except:
-            print("attendance code error")
+            print("error attendance code update")
     pass
 
 ''' ############################################### Classes for kivy windows ############################################### '''
@@ -125,6 +127,7 @@ class SubjectSelectWindow(Screen):
 
 class AttendanceControlWindow(Screen):
     attendanceInstance = AttendanceDetail()        
+    attendanceInstance.field_AttendanceId = 'No attendance code'
     
     def updateAttendanceSheet(self):
         try:
