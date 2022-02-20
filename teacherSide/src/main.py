@@ -118,10 +118,14 @@ class SubjectSelectWindow(Screen):
             else:
                 #save attendance code
                 GlobalShared.attendanceId = AttendanceListFromServer["acode"]
+                
                 for list in AttendanceListFromServer["student_list"]:
-                    print(list[0], list[1])
+                    #print(list[0], list[1])
+                    presence ="Absent"
+                    presenceList = [list[1],presence]
+                    GlobalShared.attendanceList[list[0]] = presenceList
                 print(AttendanceListFromServer["timeout"])
-                print(GlobalShared.attendanceId)
+                print(GlobalShared.attendanceList)
         except Exception as e:
             print("error :", e)
 
