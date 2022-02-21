@@ -97,7 +97,6 @@ class MainWindow(Screen):
         self.prevColor = btn.background_color
         btn.background_color = recentUsedColor
     pass
-
     def exitingButtonPress(self, btn):
         btn.background_color = self.prevColor
     pass 
@@ -157,9 +156,7 @@ class WindowManager(ScreenManager):
 
 kv = Builder.load_file("my.kv")
 
-
-class TeacherApp(App):
-    
+class TeacherApp(App):    
     def build(self): 
         return kv
 
