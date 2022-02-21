@@ -118,7 +118,6 @@ class SubjectSelectWindow(Screen):
             else:
                 #save attendance code
                 GlobalShared.attendanceId = AttendanceListFromServer["acode"]
-                
                 for list in AttendanceListFromServer["student_list"]:
                     #print(list[0], list[1])
                     presence ="Absent"
