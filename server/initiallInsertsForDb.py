@@ -146,7 +146,7 @@ i = 0
 j = 128
 #################################csv file reading and insert in student db#############################
 # opening the CSV file
-with open('PUL075BCTCD.csv', mode='r') as file:
+with open('/home/rohan/Documents/minorProject2022/server/PUL075BCTCD.csv', mode='r') as file:
 
     # reading the CSV file
     csvFile = csv.DictReader(file)
