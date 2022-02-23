@@ -87,7 +87,7 @@ class MainWindow(Screen):
     stdClass = TeacherIdInput()
     stdClass.field_id = ObjectProperty(None)
     stdClass.field_text = 'Class Id:'
-    stdClass.field_placeholder = 'Example : 075BCTCD'
+    stdClass.field_placeholder = 'Example : PUL075BCTCD'
 
     prevColor = [1, 1, 1, 1]
     def buttonPressed(self, btn, recentUsedColor):
