@@ -38,10 +38,14 @@ def sendAttendanceData(teacher_id, class_id, subject_code, attendance_request, a
             else:
                 # response contains {'student_list': list of students(id, name) for this class, 'acode':attendance code}
                 return response
+        except TimeoutError as t:
+    	    raise
         except:
             return {'error': 'error sending data'}
         finally:
             sock.close()
+    except TimeoutError as t:
+    	return{'error':'Server took long to respond'}
     except:
         return {'error': 'server not avialable'}
 
