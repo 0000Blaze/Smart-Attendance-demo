@@ -2,7 +2,6 @@ import csv
 import insertdb
 import cv2
 import numpy as np
-import face_recognition
 
 ####################### teaher insertion#############
 
@@ -148,11 +147,12 @@ for i in range(52):
 #np.savetxt('embeddingDataCD.txt',listEmbedding,delimiter="\n", fmt="%s")
 '''
 
-file =open('embeddingDataCD.txt')
-listEmbedding = file.readlines()
+fileE =open('embeddingDataCD.txt')
+listEmbedding = fileE.readlines()
 i=0
 j=128
 #################################csv file reading and insert in student db#############################
+
 # opening the CSV file
 with open('PUL075BCTCD.csv', mode ='r') as file:   
         

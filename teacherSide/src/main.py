@@ -58,6 +58,8 @@ class SubjectSelect(Widget):
     def setSubjectCode(self):
         try:
             self.field_subject = GlobalShared.subjectname
+            if len(GlobalShared.subjectname)>20:
+                self.field_subject = GlobalShared.subjectname[:18]+"..."
             print(self.field_subject)
         except:
             print("error setting scode")

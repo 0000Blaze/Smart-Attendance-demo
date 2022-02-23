@@ -29,7 +29,7 @@ dbinfo = {'host': 'localhost',
           'database': 'sas'}
 
 # attendance closes automatically after 10 minutes if teacher doesn't close it
-ATTENDANCE_TIMEOUT = 10 * 60
+ATTENDANCE_TIMEOUT = 10 * 600
 ATTENDANCE_TIMEOUT_CHECK = 10  # checks every 10 seconds for timeout of attendance
 attendance_scheduler = sched.scheduler(time.time, time.sleep)
 
