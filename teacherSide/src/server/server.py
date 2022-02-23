@@ -403,12 +403,12 @@ def classSubjectUpdater(conn, tid):
             result = mycursor.fetchall()
             response['subject'] = result
             communication_json.convertSendClose(response, conn)
-        except mysql.mysql.connector.Error as e:
+        except mysql.connector.Error as e:
             print(e)
             raise
         finally:
             mycursor.close()
-    except mysql.mysql.connector.Error as e:
+    except mysql.connector.Error as e:
     	#print(e)
         sendSQLserverError(conn)
         return
