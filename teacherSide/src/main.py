@@ -128,6 +128,7 @@ class SubjectSelectWindow(Screen):
                     presenceList = [list[1],presence]
                     GlobalShared.attendanceList[list[0]] = presenceList
                 print(AttendanceListFromServer["timeout"])
+
         except Exception as e:
             print("error :", e)
 
@@ -159,6 +160,14 @@ class AttendanceControlWindow(Screen):
                 print(AttendanceListFromServer["error"])
             else:
                 print(AttendanceListFromServer["student_list"])
+                #update presence in list
+                for listItem in AttendanceListFromServer["student_list"]:
+                    for key in GlobalShared.attendanceList.keys:
+                        print(key)
+                        if listItem == key:
+                            GlobalShared.attendanceList.values[1] = "Present"
+                print(GlobalShared.attendanceList)
+                #display attendance list
                 self.addPresentList()
         except Exception as e:
             print(e)
