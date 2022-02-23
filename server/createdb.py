@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 def createdb():
     host = 'localhost'
     user = 'root'
@@ -7,8 +8,7 @@ def createdb():
     port = 3306
     dbname = 'sas'
 
-    
-    len_cid = 10
+    len_cid = 15
     len_cname = 20
     len_scode = 10
     len_subname = 50
@@ -18,24 +18,27 @@ def createdb():
     len_tname = 50
     len_sid = 15
     len_sname = 50
-    
 
     db_query = "CREATE DATABASE {}".format(dbname)
     query_selectdb = "USE {}".format(dbname)
-    table_classroom_query = '''CREATE TABLE class(cID VARCHAR({0}),
-                                                        name varchar({1}) NOT NULL,
-                                                        PRIMARY KEY(cID)
-                                                        )ENGINE = InnoDB;'''.format(len_cid, len_cname)
-
-    table_subject_query = '''CREATE TABLE subject(scode VARCHAR({0}),
-                                                    name VARCHAR({1}) NOT NULL,
-                                                    PRIMARY KEY(scode)
-                                                    )ENGINE = InnoDB;'''.format(len_scode, len_subname)
 
     table_department_query = '''CREATE TABLE department(dID VARCHAR({0}),
                                                         name VARCHAR({1}) NOT NULL,
                                                         PRIMARY KEY(dID)
                                                         )ENGINE = InnoDB;'''.format(len_did, len_dname)
+
+    table_classroom_query = '''CREATE TABLE class(cID VARCHAR({0}),
+                                                        name varchar({1}) NOT NULL, 
+                                                        dID VARCHAR({2}),
+                                                        `sem` TINYINT UNSIGNED,
+                                                        PRIMARY KEY(cID),
+                                                        FOREIGN KEY (dID) REFERENCES department(dID)
+                                                        )ENGINE = InnoDB;'''.format(len_cid, len_cname, len_did)
+
+    table_subject_query = '''CREATE TABLE subject(scode VARCHAR({0}),
+                                                    name VARCHAR({1}) NOT NULL,
+                                                    PRIMARY KEY(scode)
+                                                    )ENGINE = InnoDB;'''.format(len_scode, len_subname)
 
     table_teacher_query = '''CREATE TABLE teacher(tID VARCHAR({0}),
                                                     name VARCHAR({1}) NOT NULL,
@@ -90,34 +93,34 @@ def createdb():
                                                 FOREIGN KEY (sID) REFERENCES student(sID)
                                                 )ENGINE = InnoDB;'''.format(len_sid)
 
-    table_queries = [table_classroom_query,
-             table_subject_query,
-             table_department_query,
-             table_teacher_query,
-             table_teaches_query,
-             table_student_query,
-             table_facedata_query,
-             table_attendance_query,
-             table_record_query]
+    table_queries = [table_department_query,
+                    table_classroom_query,
+                     table_subject_query,
+                     table_teacher_query,
+                     table_teaches_query,
+                     table_student_query,
+                     table_facedata_query,
+                     table_attendance_query,
+                     table_record_query]
 
     try:
         mysqlconn = mysql.connector.connect(
-                            host = host,
-                            user = user,
-                            password = password,
-                            port = port)
+            host=host,
+            user=user,
+            password=password,
+            port=port)
         mysqlexecuter = mysqlconn.cursor()
         try:
-            print('Executing... ',db_query)
+            print('Executing... ', db_query)
             mysqlexecuter.execute(db_query)
         except mysql.connector.Error as e:
             print(e)
         try:
-            print('Executing... ',query_selectdb)
+            print('Executing... ', query_selectdb)
             mysqlexecuter.execute(query_selectdb)
             for query in table_queries:
                 try:
-                    print('Executing... ',query)
+                    print('Executing... ', query)
                     mysqlexecuter.execute(query)
                 except mysql.connector.Error as e:
                     print(e)
@@ -125,6 +128,7 @@ def createdb():
             print(e)
     except mysql.connector.Error as e:
         print(e)
+
 
 if __name__ == '__main__':
     createdb()
