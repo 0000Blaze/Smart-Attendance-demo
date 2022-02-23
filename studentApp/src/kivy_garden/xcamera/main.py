@@ -124,6 +124,7 @@ class RollNoInput(Widget):
             app.rollNo = textIp.text
             # print("fhfgh",ipText)
         else:
+            app.rollNo = "PUL075BCT065"
             print("text empty")
 
     def setACode(self, app, textIp):

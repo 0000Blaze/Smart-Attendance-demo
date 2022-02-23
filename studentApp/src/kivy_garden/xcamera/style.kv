@@ -82,18 +82,7 @@ WindowManager:
                     app.root.current = "camera"
                     root.manager.transition.direction = "left"
                     app.root.ids.camera.setIndex()
-            Button:
-                id: verifyRoll
-                name:"verifyRoll"
-                text : "Verify2"
-                
-                #size_hint : labelW,labelH
-                on_release: 
-                    root.stdRoll.setRollNo(app,tinp)
-                    root.stdAcode.setACode(app,acodeinp)
-                    app.root.current = "camera"
-                    root.manager.transition.direction = "left"
-                    app.root.ids.camera.setIndex2()
+            
                 
 
                 
