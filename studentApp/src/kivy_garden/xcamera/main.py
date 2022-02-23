@@ -121,8 +121,7 @@ class RollNoInput(Widget):
 
     def setRollNo(self, app, textIp):
         if textIp != "":
-            app.rollNo = textIp.text
-            # print("fhfgh",ipText)
+            app.rollNo = textIp.text.upper()
         else:
             app.rollNo = "PUL075BCT065"
             print("text empty")
