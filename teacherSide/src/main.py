@@ -128,7 +128,7 @@ class SubjectSelectWindow(Screen):
                     presenceList = [list[1],presence]
                     GlobalShared.attendanceList[list[0]] = presenceList
                 print(AttendanceListFromServer["timeout"])
-                print(GlobalShared.attendanceList)
+                #print(GlobalShared.attendanceList)
         except Exception as e:
             print("error :", e)
 
@@ -152,6 +152,7 @@ class AttendanceControlWindow(Screen):
             if x == 24:
                 z = 400
                 y = 0
+                
     def updateAttendanceSheet(self):
         try:
             AttendanceListFromServer = client_teacher.getAttendance(GlobalShared.teacherId,GlobalShared.classId)
