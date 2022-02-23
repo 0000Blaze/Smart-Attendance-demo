@@ -6,12 +6,12 @@ import face_recognition
 
 ####################### teaher insertion#############
 
-#insertdb.insertTeacher("001","Aman Shakya","5")
+insertdb.insertTeacher("001","Aman Shakya","5")
 
 ################# insert into teaches ###########################
 
 insertdb.insertIntoTeaches("001","075BCTCD","CT652","6")
-'''
+
 ###################################subject insertion####################################
 subjectBCT = {
     "SH401":"Engineering Mathematics I",
@@ -120,7 +120,7 @@ for x in departmentDb:
     insertdb.insertDepartment(x,departmentDb[x])
 
 ################################# face embedding calculation ###########################################
-'''
+
 '''
 listEmbedding =[]
 
@@ -147,7 +147,7 @@ for i in range(52):
 #saving data of face embeddings in a text file
 #np.savetxt('embeddingDataCD.txt',listEmbedding,delimiter="\n", fmt="%s")
 '''
-'''
+
 file =open('embeddingDataCD.txt')
 listEmbedding = file.readlines()
 i=0
@@ -164,4 +164,3 @@ with open('PUL075BCTCD.csv', mode ='r') as file:
             insertdb.insertStudent(lines['RollNo'],lines['Name'],"075BCTCD","5",listEmbedding[i:j])
             i=i+128
             j=j+128
-'''
