@@ -32,10 +32,14 @@ def markAttendance(student_id, acode, face_embd, _attendance_server=attendance_s
             elif "success" in response:
                 # print(response['success'])
                 return response #response contains 
+        except TimeoutError as t:
+            raise
         except:
             return {'error': 'error sending/receiving data'}
         finally:
             sock.close()
+    except TimeoutError as t:
+    	return{'error':'Server took long to respond'}
     except:
         return {'error': 'server not avialable'}
 
