@@ -18,6 +18,7 @@ def createdb():
     len_tname = 50
     len_sid = 15
     len_sname = 50
+    
 
     db_query = "CREATE DATABASE {}".format(dbname)
     query_selectdb = "USE {}".format(dbname)
@@ -46,7 +47,8 @@ def createdb():
     table_teaches_query = '''CREATE TABLE teaches(tID VARCHAR({0}),
                                                     scode VARCHAR({1}),
                                                     cID VARCHAR({2}),
-                                                    PRIMARY KEY(tID, scode, cID),
+                                                    `sem` TINYINT UNSIGNED,
+                                                    PRIMARY KEY(tID, scode, cID, sem),
                                                     FOREIGN KEY (tID) REFERENCES teacher(tID),
                                                     FOREIGN KEY (scode) REFERENCES subject(scode),
                                                     FOREIGN KEY (cID) REFERENCES class(cID)

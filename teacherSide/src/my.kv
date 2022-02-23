@@ -80,6 +80,8 @@ WindowManager:
                 on_release: 
                     root.stdTid.setTeacherId(app,teacherId)
                     root.stdClass.setClassId(app,classId)
+                    root.getSubjectList()
+                    app.root.ids.subject_select.stdSid.setSubjectCode()
                     app.root.current = "subject-select"
                     root.manager.transition.direction = "left"
 
@@ -136,77 +138,11 @@ WindowManager:
                 anchor_x :'right'  
                 anchor_y :'center'
 
-
                 Button:
                     id: btn
-                    text: 'Subject'
-                    on_release: dropdown.open(self)
-                    
-                Widget:
-                    on_parent:dropdown.dismiss() 
-                    
-                DropDown:
-                    id: dropdown
-                    on_select: btn.text = '{}'.format(args[1])
-
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'OS'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('OS')
-                            root.stdSid.setSubjectCode(app,'CT656')
-
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'OOAD'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('OOAD')
-                            root.stdSid.setSubjectCode(app,'CT651')
-
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'AI'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('AI')
-                            root.stdSid.setSubjectCode(app,'CT653')
-
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'DBMS'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('DBMS')
-                            root.stdSid.setSubjectCode(app,'CT652')
-
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'ES'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('ES')
-                            root.stdSid.setSubjectCode(app,'CT655')
-                    Button:
-                        size_hint : 1,0.2
-                        font_size : Window.width/40
-                        text: 'EE'
-                        size_hint_y: None
-                        height: butH/4
-                        on_release: 
-                            dropdown.select('EE')        
-                            root.stdSid.setSubjectCode(app,'CE655')
+                    text: root.stdSid.field_subject
+                    font_size:Window.width/40
+                
 <AttendanceControlWindow>:
     name : "attendance-control"
 
@@ -265,3 +201,10 @@ WindowManager:
                 font_size : Window.width/40
                 on_release:
                     root.finalAttendanceSheet()
+    RecycleBoxLayout:
+        id:rv
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'

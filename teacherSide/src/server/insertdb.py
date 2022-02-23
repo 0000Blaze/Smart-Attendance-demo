@@ -88,19 +88,19 @@ def insertTeacher(tid, name, depid):
         print(e)
         return False
 
-def insertIntoTeaches(tid, cid, subcode):
+def insertIntoTeaches(tid, classid, subcode, sem):
     if type(subcode) == list:
-        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode[0], classid)
+        query = 'INSERT INTO teaches(tID, scode, cID, `sem`) VALUES("{0}","{1}","{2}", {3})'.format(tid, subcode[0], classid, sem)
         for i in range(len(subcode)-1):
-            query += '("{0}","{1}","{2}")'.format(tid, subcode[i+1], classid)
+            query += ',("{0}","{1}","{2}",{3})'.format(tid, subcode[i+1], classid, sem)
     else:
-        query = 'INSERT INTO teaches(tID, scode, cID) VALUES("{0}","{1}","{2}")'.format(tid, subcode, classid)
+        query = 'INSERT INTO teaches(tID, scode, cID, `sem`) VALUES("{0}","{1}","{2}", {3})'.format(tid, subcode, classid, sem)
     try:
         mysqlconn, mycursor = connect2db()
         try:
             mycursor.execute(query)
             mysqlconn.commit()
-            print(f'Added ({tid},{cid},{subcode}) to teaches table')
+            print(f'Added ({tid},{cid},{subcode},{sem}) to teaches table')
             return True
         except mysql.connector.Error as e:
             print(e)

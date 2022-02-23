@@ -29,7 +29,7 @@ dbinfo = {'host': 'localhost',
           'database': 'sas'}
 
 # attendance closes automatically after 10 minutes if teacher doesn't close it
-ATTENDANCE_TIMEOUT = 1 * 60
+ATTENDANCE_TIMEOUT = 10 * 60
 ATTENDANCE_TIMEOUT_CHECK = 10  # checks every 10 seconds for timeout of attendance
 attendance_scheduler = sched.scheduler(time.time, time.sleep)
 
@@ -341,8 +341,7 @@ def teacherHandler(conn):
                 if not data['cid'] in students_present:
                     try:
                         mysqlconn, mucursor = connect2db()
-                        mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {0} AND sID = "{1}"'.format(
-                                    active_attendance[data['cid']][2], data['sid'])
+                        mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {0} AND sID = "{1}"'.format(active_attendance[data['cid']][2], data['sid'])
                         try:
                             mycursor.execute(mark_attendance_query)
                             mysqlconn.commit()
@@ -391,25 +390,26 @@ def teacherConnectionListen():
 
 # class and subject data updater for teacher
 def classSubjectUpdater(conn, tid):
-    data = communication_json.readall(conn)
     response = {}
     try:
         mysqlconn, mycursor = connect2db()
         try:
-            classlist_query = 'SELECT cID, name FROM class INNER JOIN teaches WHERE tID = {0}'.format(tid)
+            classlist_query = 'SELECT cID, name FROM class INNER JOIN teaches USING (cID) WHERE tID = {0} AND teaches.`sem` != 0' .format(tid)
             mycursor.execute(classlist_query)
             result = mycursor.fetchall()
             response['class'] = result
-            subjectlist_query = 'SELECT scode, name FROM subject INNER JOIN teaches WHERE tID = {0}'.format(tid)
+            subjectlist_query = 'SELECT scode, name FROM subject INNER JOIN teaches USING (scode) WHERE tID = {0} AND teaches.`sem` != 0'.format(tid)
             mycursor.execute(subjectlist_query)
             result = mycursor.fetchall()
             response['subject'] = result
             communication_json.convertSendClose(response, conn)
-        except:
+        except mysql.mysql.connector.Error as e:
+            print(e)
             raise
         finally:
             mycursor.close()
-    except:
+    except mysql.mysql.connector.Error as e:
+    	#print(e)
         sendSQLserverError(conn)
         return
 

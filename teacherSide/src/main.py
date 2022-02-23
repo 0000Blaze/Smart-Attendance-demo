@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import GlobalShared
-import abc
+import utility
 from server import client_teacher
 import kivy
 from numpy import datetime_data
@@ -53,16 +53,14 @@ class TeacherIdInput(Widget):
 #subject id selection class
 class SubjectSelect(Widget):
     field_id = ObjectProperty(None)
-    field_text = StringProperty(None)
+    field_subject = StringProperty(None)
 
-    def setSubjectCode(self, app, textIp):
-        if textIp != "":
-            app.subjectId = textIp
-            #print(app.subjectId)
-            GlobalShared.subjectId = app.subjectId
-            print(GlobalShared.subjectId)
-        else:
-            print("text empty")
+    def setSubjectCode(self):
+        try:
+            self.field_subject = GlobalShared.subjectname
+            print(self.field_subject)
+        except:
+            print("error setting scode")
     pass
     
     
@@ -73,9 +71,6 @@ class AttendanceDetail(Widget):
         try:
             self.field_AttendanceId = "Attendance code: " + str(GlobalShared.attendanceId)
             print(self.field_AttendanceId)
-            #app = App.get_running_app()
-            #self.attendance_control.ids.anchor_attendance_code.ids.box_attendance_code.ids.attendance_code.text = GlobalShared.attendanceId
-            #print(self.attendance_control.ids.anchor_attendance_code.ids.box_attendance_code.ids.attendance_code.text ,GlobalShared.attendanceId)
         except:
             print("error attendance code update")
     pass
@@ -100,13 +95,21 @@ class MainWindow(Screen):
     def exitingButtonPress(self, btn):
         btn.background_color = self.prevColor
     pass 
-
-    pass
+    
+    def getSubjectList(self):
+        try:
+            subjectListFromServer = client_teacher.updateClassAndSubjects(GlobalShared.teacherId)
+            GlobalShared.subjectId = subjectListFromServer["subject"][0][0]
+            GlobalShared.subjectname = subjectListFromServer["subject"][0][1]
+            print(GlobalShared.subjectId)
+        except:
+            print("Subject retrival error")
+                
 
 class SubjectSelectWindow(Screen):
     stdSid = SubjectSelect()
     stdSid.field_id = ObjectProperty(None)
-    stdSid.field_text = 'Subject Id:'
+    stdSid.field_subject = 'Subject Id:'
     pass
 
     def startAttendanceSheet(self):
@@ -131,13 +134,30 @@ class AttendanceControlWindow(Screen):
     attendanceInstance = AttendanceDetail()        
     attendanceInstance.field_AttendanceId = 'No attendance code'
     
+    def addPresentList(self):
+        # self.add_widget(self.presentList)
+        # self.ids.rv.add_widget(RV(), 1)
+        # for child in self.ids.rv.children:
+        #     child.data = utility.convertdictToList(GlobalShared.attendanceList)
+        x = 0
+        y = 0
+        z = 0
+        for name in utility.convertdictToList(GlobalShared.attendanceList):
+            self.ids.rv.add_widget(
+                Label(text=name, pos=(100+z, 350+y), font_size=12))
+            x = x+1
+            y = y-15
+            if x == 24:
+                z = 400
+                y = 0
     def updateAttendanceSheet(self):
         try:
             AttendanceListFromServer = client_teacher.getAttendance(GlobalShared.teacherId,GlobalShared.classId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
-                print(AttendanceListFromServer["student_list"])
+                # print(AttendanceListFromServer["student_list"])
+                self.addPresentList()
         except Exception as e:
             print(e)
 
