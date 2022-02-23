@@ -1,9 +1,8 @@
 testing_apk_dev/.buildozer
-*.csv
 *.jpg
-*.png
 *.jpeg
 __pycache__
+data/*.png
 teacherSide/.buildozer
 studentApp/.buildozer
 testing_apk_dev/kivyy
