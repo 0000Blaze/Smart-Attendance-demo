@@ -28,20 +28,20 @@ def splitClasses():
 def addNewStudents():
     #added required students record
     dataAB=[
-        ['PUL075BCT097   ','BIBEK BASHYAL'],
-        ['PUL075BCT099   ','SAUGAT KAFLE']
+        ['PUL075BCT097','BIBEK BASHYAL'],
+        ['PUL075BCT099','SAUGAT KAFLE']
     ]
 
     dataCD =[
-        ['PUL075BCT098   ','ACHYUT BURLAKOTI'],
-        ['PUL075BCT100   ','SIJAL BARAL']
+        ['PUL075BCT098','ACHYUT BURLAKOTI'],
+        ['PUL075BCT100','SIJAL BARAL']
     ]
 
     data =[
-        ['PUL075BCT097   ','BIBEK BASHYAL'],
-        ['PUL075BCT098   ','ACHYUT BURLAKOTI'],
-        ['PUL075BCT099   ','SAUGAT KAFLE'],
-        ['PUL075BCT100   ','SIJAL BARAL']
+        ['PUL075BCT097','BIBEK BASHYAL'],
+        ['PUL075BCT098','ACHYUT BURLAKOTI'],
+        ['PUL075BCT099','SAUGAT KAFLE'],
+        ['PUL075BCT100','SIJAL BARAL']
     ]
 
     # Open our existing CSV file for AB class
@@ -70,7 +70,7 @@ def removeDropouts():
     data = pd.read_csv('PUL075BCT.csv',index_col="RollNo")
     
     # dropping passed values
-    data.drop(["PUL075BCT017   ", "PUL075BCT036   ", "PUL075BCT073   ","PUL075BCT087   "], inplace = True)
+    data.drop(["PUL075BCT017", "PUL075BCT036", "PUL075BCT073","PUL075BCT087"], inplace = True)
     
     # dropping passed columns
     data.drop(data.columns[data.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)

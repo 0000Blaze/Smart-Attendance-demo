@@ -129,7 +129,6 @@ class RollNoInput(Widget):
     def setACode(self, app, textIp):
         if textIp != "":
             app.acode = textIp.text
-            # print("fhfgh",ipText)
         else:
             print("text empty")
     pass
@@ -227,8 +226,10 @@ class StudentApp(App):
             self.encodingsSuccess = True
             # print(self.encodingsData)
             #  Send embeddings to server
+            print(self.rollNo)
             dataFromServer = server.client_student.markAttendance(
                 self.rollNo, int(self.acode), self.encodingsData)
+            print(dataFromServer)
             if "error" in dataFromServer:
                 print(dataFromServer["error"])
             else:

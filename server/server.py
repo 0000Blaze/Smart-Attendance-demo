@@ -65,7 +65,7 @@ def sendSQLserverError(conn):
 
 def studentHandler(conn):
     data = communication_json.readall(conn)
-    # print(data)
+    print(data['sid'])
     response = {}
     # find the class of the student
     class_query = 'SELECT cID FROM student WHERE sID = "{}"'.format(

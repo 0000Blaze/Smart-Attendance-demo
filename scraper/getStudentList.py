@@ -49,7 +49,6 @@ for x in z2:
 for x in z1:
     x1= x.split(">",1)
     rollNo.append(x1[1])
-
 #################################### END extracting name and roll number #####################################
 
 #remove the weird unicode character
@@ -58,6 +57,11 @@ for index, element in enumerate(rollNo):
 
 for index, element in enumerate(name):
     name[index] = element.replace('\xa0',' ')
+
+for index in range(len(rollNo)):
+    rollNo[index] = rollNo[index].replace(" ","")
+
+#print(rollNo)    
 
 #pandas dataframe
 records = pd.DataFrame({
