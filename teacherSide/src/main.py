@@ -152,6 +152,10 @@ class AttendanceControlWindow(Screen):
             if x == 24:
                 z = 400
                 y = 0
+    
+    def removePresentList(self):
+        for name in utility.convertdictToList(GlobalShared.attendanceList):
+            self.ids.rv.remove_widget(self.ids.rv)
                 
     def updateAttendanceSheet(self):
         try:
@@ -159,11 +163,12 @@ class AttendanceControlWindow(Screen):
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
             else:
-                print(AttendanceListFromServer["student_list"])
+                #print(AttendanceListFromServer["student_list"])
                 #update presence in list
                 keys = AttendanceListFromServer["student_list"]
                 for key in keys:
                     GlobalShared.attendanceList[key][1] = "Present"
+                    self.removePresentList()
                 print(GlobalShared.attendanceList)
                 #display attendance list
                 self.addPresentList()
