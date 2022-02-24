@@ -138,11 +138,11 @@ class MainWindow(Screen):
     stdRoll = RollNoInput()
     stdRoll.field_id = ObjectProperty(None)
     stdRoll.field_text = 'Roll No:'
-    stdRoll.field_placeholder = 'Enter Roll no:'
+    stdRoll.field_placeholder = 'Enter Roll no:PUL075BCT066'
     stdAcode = RollNoInput()
     stdAcode.field_id = ObjectProperty(None)
     stdAcode.field_text = 'Attendance Code'
-    stdAcode.field_placeholder = 'Enter Attendance Code:'
+    stdAcode.field_placeholder = 'Enter Attendance Code:123'
     pass
 
 

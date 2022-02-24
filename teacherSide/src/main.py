@@ -161,11 +161,9 @@ class AttendanceControlWindow(Screen):
             else:
                 print(AttendanceListFromServer["student_list"])
                 #update presence in list
-                for listItem in AttendanceListFromServer["student_list"]:
-                    for key in GlobalShared.attendanceList.keys:
-                        print(key)
-                        if listItem == key:
-                            GlobalShared.attendanceList.values[1] = "Present"
+                keys = AttendanceListFromServer["student_list"]
+                for key in keys:
+                    GlobalShared.attendanceList[key][1] = "Present"
                 print(GlobalShared.attendanceList)
                 #display attendance list
                 self.addPresentList()
