@@ -166,3 +166,8 @@ insertdb.insertTeacher("001", "Aman Shakya", "5")
 ################# insert into teaches ###########################
 
 insertdb.insertIntoTeaches("001","PUL075BCTCD","CT652","6")
+
+
+############### insert into admin ############################
+
+insertdb.insertAdmin("aman", "12")
