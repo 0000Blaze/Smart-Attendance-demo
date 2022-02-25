@@ -94,7 +94,7 @@ body{
     margin-top: 1rem;
     margin-left: 0.5rem;
 }
-.card-holder  input {
+.card-holder  .btn {
     width: 11rem;
     background: #222;
     text-align: center;
@@ -105,6 +105,10 @@ body{
     font-size: 18px;
     font-weight: 500;
     color: whitesmoke;
+}
+.btn:hover{
+    background-color: crimson;
+    transform: scale(1.05);
 }
 /********** footer section styling **********/
 footer {

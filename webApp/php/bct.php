@@ -6,6 +6,7 @@
     <title>Smart Attendance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../css/bctStyle.css">
+    <script src = "../js/functions.js"></script>
 </head>
 
 <body>
@@ -17,11 +18,11 @@
     <div class="bg">
     <div class="spacer">
         <div class ="search-form">
-            <form method="POST" action="searchAttendance.php">
+            <form method="POST" action="searchAttendance.php" id="SearchDataForm" onsubmit = "return compareDateFunc();">
                 <label for="startDate">Start Date:</label>
-                <input type="date" name="startDate">
+                <input type="date" name="startDate" id="startDate" oninput=compareDateFunc()>
                 <label for="startDate">End Date:</label>
-                <input type="Date" name="endDate">
+                <input type="Date" name="endDate" id="endDate" oninput=compareDateFunc()>
                 <?php include 'connectToDb.php';
                     if (!$sqldb->select_db('sas')) 
                     {
@@ -54,6 +55,7 @@
         <?php
             $username = $_SESSION["username"];
             $dID = $_GET["dID"];
+            $_SESSION["department"] = $dID;
             $getclassQuery = "SELECT cID,name from class WHERE dID = '$dID' and `sem`!=0";
             if($class = $sqldb->query($getclassQuery))
             {
@@ -66,7 +68,7 @@
                         $cID = $class_row['cID'];
         ?>
         <div class="card-holder">
-            <input type="submit" value ="<?php echo $className?>" > 
+            <button class ="btn" name="class" value ="<?php echo $cID?>" on_pesss = "SearchDataForm.submit()"> <?php echo $className?></button>
         </div>            
                     <?php
                     }
