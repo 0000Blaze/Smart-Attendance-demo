@@ -43,7 +43,7 @@ body{
 .navbar .logOut-btn:hover{
     transform: scale(1.2);
 }
-
+/* BACKGROUND */
 .bg-image{
     height: 100%;
     background-position: center center;
@@ -56,37 +56,44 @@ body{
 
 .card-holder{
     display: flex;
-    justify-content: center;
-    padding: 5em;
-    padding-top: 16em;
-    align-items: center;
+    margin-top: 7rem;
+    float: left;
+    
 }
 .card {
-    width: calc(33% - 20px);
+    width: 250px; 
     background: #222;
     text-align: center;
     border-radius: 6px;
-    padding: 25px 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 5px;
-    height: auto;
-    overflow: auto;
-    float: inline-start;
+    margin: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    height: 6rem;
+    overflow: hidden;
   }
 .card:hover {
     background: crimson;
+    overflow: hidden;
   }
 .card .box {
+    padding: 0.5rem;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 .card:hover .box {
     transform: scale(1.05);
+    overflow: hidden;
 }
-.card .text {
+.card a{
+    overflow: hidden;
+}
+.card a .text {
     font-size: 20px;
     font-weight: 500;
     color: whitesmoke;
+    overflow: hidden;
 }
 /* footer section styling */
 footer {

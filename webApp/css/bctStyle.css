@@ -45,6 +45,7 @@ body{
 .navbar .logOut-btn:hover{
     transform: scale(1.2);
 }
+/******************** BACKGROUND ******************/
 .bg-image{
     height: 100%;
     background-position: center center;
@@ -54,42 +55,58 @@ body{
     background-attachment: fixed;
     align-items: center;
 }
-
+/* blur background */
+.bg {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+/* spacer to align all elements in center */
+.spacer {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+/******************** SEARCH FORM ******************/
+.search-form{
+    padding-top: 7rem;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: 800;
+}
+.search-form input{
+    border-radius: 6px;
+    width: auto;
+    height: 2rem;
+}
+.search-form select{
+    border-radius: 6px;
+    width: auto;
+    height: 2rem;
+}
+/******************** BUTTONS CLASS ********************/
+/* card floater */
 .card-holder{
     display: flex;
-    justify-content: center;
-    padding: 5em;
-    padding-top: 16em;
-    align-items: center;
+    float: left;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
 }
-.card {
-    width: calc(25% - 20px);
+.card-holder  input {
+    width: 11rem;
     background: #222;
     text-align: center;
     border-radius: 6px;
     padding: 25px 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
     margin: 5px;
-    height: auto;
-    overflow: auto;
-    float: inline-start;
-  }
-.card:hover {
-    background: crimson;
-  }
-.card .box {
-    transition: all 0.3s ease;
-}
-.card:hover .box {
-    transform: scale(1.05);
-}
-.card .text {
     font-size: 18px;
     font-weight: 500;
     color: whitesmoke;
 }
-/* footer section styling */
+/********** footer section styling **********/
 footer {
     background: #111;
     padding: 15px 23px;
