@@ -54,7 +54,7 @@
         <?php
             $username = $_SESSION["username"];
             $dID = $_GET["dID"];
-            $getclassQuery = "SELECT cID,name from class";// WHERE dID = '$dID' and `sem`!=0";
+            $getclassQuery = "SELECT cID,name from class WHERE dID = '$dID' and `sem`!=0";
             if($class = $sqldb->query($getclassQuery))
             {
                 if (mysqli_num_rows($class) > 0)
