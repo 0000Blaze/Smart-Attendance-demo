@@ -4,7 +4,7 @@ import mysql.connector
 def createdb():
     host = 'localhost'
     user = 'root'
-    password = 'Ashutosh123$'
+    password = ''
     port = 3306
     dbname = 'sas'
 
@@ -18,9 +18,15 @@ def createdb():
     len_tname = 50
     len_sid = 15
     len_sname = 50
+    len_username = 30
+    len_password = 55
 
     db_query = "CREATE DATABASE {}".format(dbname)
     query_selectdb = "USE {}".format(dbname)
+
+    table_admin_query = '''CREATE TABLE admin(username VARCHAR({0}) NOT NULL,
+                                              password VARCHAR({1}) NOT NULL
+                                              )ENGINE = InnoDB;'''.format(len_username, len_password)
 
     table_department_query = '''CREATE TABLE department(dID VARCHAR({0}),
                                                         name VARCHAR({1}) NOT NULL,
@@ -93,8 +99,9 @@ def createdb():
                                                 FOREIGN KEY (sID) REFERENCES student(sID)
                                                 )ENGINE = InnoDB;'''.format(len_sid)
 
-    table_queries = [table_department_query,
-                    table_classroom_query,
+    table_queries = [table_admin_query,
+                     table_department_query,
+                     table_classroom_query,
                      table_subject_query,
                      table_teacher_query,
                      table_teaches_query,
