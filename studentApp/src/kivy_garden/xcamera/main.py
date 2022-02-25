@@ -149,6 +149,8 @@ class MainWindow(Screen):
 class CameraWindow(Screen):
     # def picture_taken(self, obj, filename):
     #     print('Picture taken and saved to {}'.format(filename))
+    afterCaptureMessage = "bhayena"
+
     def setIndex(self):
         if is_android():
             self.ids.xcamera.index = 1
@@ -170,7 +172,11 @@ class CameraWindow(Screen):
     pass
 
     def setStatusLabel(self, label):
-        label.text = "done"
+        label.text = self.afterCaptureMessage
+
+    @classmethod
+    def setAfterCaptureMessage(self, text):
+        self.afterCaptureMessage = text
 
 
 class DataProcessingWindow(Screen):
@@ -232,9 +238,10 @@ class StudentApp(App):
             print(dataFromServer)
             if "error" in dataFromServer:
                 print(dataFromServer["error"])
+                CameraWindow.setAfterCaptureMessage(dataFromServer["error"])
             else:
                 print(dataFromServer["success"])
-
+                CameraWindow.setAfterCaptureMessage(dataFromServer["success"])
             os.remove(filename)
         except Exception as e:
             print("No face detected.")
