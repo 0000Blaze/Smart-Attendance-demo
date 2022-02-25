@@ -146,7 +146,7 @@ class AttendanceControlWindow(Screen):
         z = 0
         for name in utility.convertdictToList(GlobalShared.attendanceList):
             self.ids.rv.add_widget(
-                Label(text=name, pos=(100+z, 350+y), font_size=12))
+                Label(text=name, pos=(130+z, 350+y), font_size=12))
             x = x+1
             y = y-15
             if x == 24:
