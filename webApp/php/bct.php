@@ -11,7 +11,7 @@
 
 <body>
     <nav class="navbar">
-        <div class="logo"><a href="departments.html">Smart Attendance</a></div>
+        <div class="logo"><a href="departments.php">Smart Attendance</a></div>
         <div class="logOut-btn"><a href="../index.html">Log Out</a></div>
     </nav>
 <div class="bg-image">
