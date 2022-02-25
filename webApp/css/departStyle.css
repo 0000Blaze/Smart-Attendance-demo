@@ -94,59 +94,6 @@ body{
     color: whitesmoke;
     overflow: hidden;
 }
-/* FOR search page */
-.card-search {
-    width: 200px; 
-    background: #222;
-    text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 20px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    height: 6rem;
-    overflow: hidden;
-    /* padding: 1rem; */
-  }
-.card-search .box {
-    background: #222;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-.card-search:hover .box {
-    background: crimson;
-    transform: scale(1.05);
-    overflow: hidden;
-}
-.card-search a .text {
-    font-size: 25px;
-    font-weight: 500;
-    color: whitesmoke;
-    overflow: hidden;
-}
-.box-btn{
-    color: whitesmoke;
-    font-size: 22px;
-    font-weight: 500;
-    width: 200px; 
-    background: #222;
-    text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 20px;
-    margin-top: 10px;
-    margin-bottom: 0px;
-    height: 6rem;
-    overflow: hidden;
-}
-
-.box-btn:hover{
-    background-color: crimson;
-    transform: scale(1.05);
-}
 /* footer section styling */
 footer {
     background: #111;
