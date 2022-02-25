@@ -2,7 +2,7 @@ import mysql.connector
 
 dbinfo = {'host': 'localhost',
           'user': 'root',
-          'password': 'Ashutosh123$',
+          'password': '',
           'port': 3306,
           'database': 'sas'}
 
@@ -15,9 +15,29 @@ def connect2db(_dbinfo=dbinfo):
     return mysqlconn, mycursor
 
 
-def insertClass(classid, name, depID,sem):
+def insertAdmin(username, password):
+    query = 'INSERT INTO admin(username,password) VALUES("{0}","{1}")'.format(
+        username, password)
+    try:
+        mysqlconn, mycursor = connect2db()
+        try:
+            mycursor.execute(query)
+            mysqlconn.commit()
+            print(f'Added ({username}) to admin table')
+            return True
+        except mysql.connector.Error as e:
+            print(e)
+            return False
+        finally:
+            mycursor.close()
+    except mysql.connector.Error as e:
+        print(e)
+        return False
+
+
+def insertClass(classid, name, depID, sem):
     query = 'INSERT INTO class(cID, name, dID,`sem`) VALUES("{0}","{1}","{2}",{3})'.format(
-        classid, name, depID,int(sem))
+        classid, name, depID, int(sem))
     try:
         mysqlconn, mycursor = connect2db()
         try:
