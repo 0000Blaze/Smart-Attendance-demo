@@ -165,6 +165,8 @@ WindowManager:
             size_hint : [None,None]
             size : [smallButW,smallButH]    
             on_release:
+                root.attendanceInstance.clearAttendanceCode()
+                root.removePresentList()
                 app.root.current = "subject-select"
                 root.manager.transition.direction = "right"
     

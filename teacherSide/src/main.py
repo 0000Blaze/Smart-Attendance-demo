@@ -34,7 +34,6 @@ class TeacherIdInput(Widget):
     def setTeacherId(self, app, textIp):
         if textIp != "":
             app.teacherId = textIp.text
-            #print(app.teacherId,textIp.text)
             GlobalShared.teacherId = app.teacherId
             print(GlobalShared.teacherId)
         else:
@@ -43,7 +42,6 @@ class TeacherIdInput(Widget):
     def setClassId(self, app, textIp):
         if textIp != "":
             app.classId = textIp.text.upper()
-            #print(app.classId,textIp.text)
             GlobalShared.classId = app.classId
             print(GlobalShared.classId)
         else:
@@ -76,6 +74,10 @@ class AttendanceDetail(Widget):
         except:
             print("error attendance code update")
     pass
+
+    def clearAttendanceCode(self):
+        GlobalShared.attendanceId = ""
+        self.field_AttendanceId = "No attendance code"
 
 ''' ############################################### Classes for kivy windows ############################################### '''
 class MainWindow(Screen):
@@ -137,10 +139,6 @@ class AttendanceControlWindow(Screen):
     attendanceInstance.field_AttendanceId = 'No attendance code'
     
     def addPresentList(self):
-        # self.add_widget(self.presentList)
-        # self.ids.rv.add_widget(RV(), 1)
-        # for child in self.ids.rv.children:
-        #     child.data = utility.convertdictToList(GlobalShared.attendanceList)
         x = 0
         y = 0
         z = 0
@@ -156,7 +154,7 @@ class AttendanceControlWindow(Screen):
     def removePresentList(self):
         for name in utility.convertdictToList(GlobalShared.attendanceList):
             self.ids.rv.clear_widgets()
-                
+
     def updateAttendanceSheet(self):
         try:
             AttendanceListFromServer = client_teacher.getAttendance(GlobalShared.teacherId,GlobalShared.classId)
