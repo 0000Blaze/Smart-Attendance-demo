@@ -67,6 +67,7 @@ class SubjectSelect(Widget):
 #attendance code class
 class AttendanceDetail(Widget):
     field_AttendanceId = StringProperty(None)
+
     def setAttendanceId(self):
         try:
             self.field_AttendanceId = "Attendance code: " + str(GlobalShared.attendanceId)
@@ -137,7 +138,7 @@ class SubjectSelectWindow(Screen):
 class AttendanceControlWindow(Screen):
     attendanceInstance = AttendanceDetail()        
     attendanceInstance.field_AttendanceId = 'No attendance code'
-    
+        
     def addPresentList(self):
         x = 0
         y = 0
@@ -180,6 +181,17 @@ class AttendanceControlWindow(Screen):
                 print(AttendanceListFromServer["success"])
         except Exception as e:
             print(e)
+
+    def manualPresent(self,text):
+        try:
+            text.text =str(text.text)
+            text.text.upper()
+            print(text.text)
+            client_teacher.markAttendance(GlobalShared.teacherId,GlobalShared.classId,text.text)
+            text.text = ""
+        except:
+            print("some error occured during manual attendance")
+
 ''' ############################################### Kivy App builder ################################################ '''
 class WindowManager(ScreenManager):
     pass

@@ -184,10 +184,11 @@ WindowManager:
             Label:
                 id: attendance_code
                 text: root.attendanceInstance.field_AttendanceId
+                    
         BoxLayout:
             orientation:'horizontal'
             columns:2
-            size_hint : 0.6,0.25
+            size_hint : 0.9,0.25
 
             Button:
                 text: "Update Attendance"
@@ -203,6 +204,20 @@ WindowManager:
                 font_size : Window.width/40
                 on_release:
                     root.finalAttendanceSheet()
+    
+            TextInput:
+                size_hint : 1,0.2
+                id: manualAttendance
+                name:"studentCodeToPresent"
+                hint_text: "Eg:PUL075BCT066"
+                
+            Button:
+                size_hint : 1,0.2
+                text: "Present"
+                font_size : Window.width/40
+                on_release:
+                    root.manualPresent(manualAttendance)
+
     RecycleBoxLayout:
         id:rv
         default_size: None, dp(56)
