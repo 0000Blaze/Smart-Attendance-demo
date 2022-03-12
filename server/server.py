@@ -338,25 +338,26 @@ def teacherHandler(conn):
         if data['cid'] in active_attendance:
             if active_attendance[data['cid']][0] == data['tid']:
                 # same teacher is only allowed to mark a student present
-                if not data['cid'] in students_present:
+                if not data['sid'] in students_present[data['cid']]:
                     try:
-                        mysqlconn, mucursor = connect2db()
+                        mysqlconn, mycursor = connect2db()
                         mark_attendance_query = 'UPDATE record SET presence = true WHERE aID = {0} AND sID = "{1}"'.format(active_attendance[data['cid']][2], data['sid'])
                         try:
                             mycursor.execute(mark_attendance_query)
                             mysqlconn.commit()
-                            response['success'] = 'Attendance marked for {data["sid"]}'
+                            students_present[data['cid']].append(data['sid'])
+                            response['success'] = f'Attendance marked for {data["sid"]}'
                             communication_json.convertSendClose(response, conn)
                             return
-                        except mysql.mysql.connector.Error as e:
+                        except mysql.connector.Error as e:
                             response['error'] = 'Student ID wrong'
                             communication_json.convertSendClose(response, conn)
                             return
-                    except mysql.mysql.connector.Error as e:
+                    except mysql.connector.Error as e:
                         sendSQLserverError(conn)
                         return
                 else:
-                    response['error'] = 'Attendance already marked for {data["sid"]}'
+                    response['error'] = f'Attendance already marked for {data["sid"]}'
                     communication_json.convertSendClose(response, conn)
                     return
             else:

@@ -186,8 +186,8 @@ class AttendanceControlWindow(Screen):
         try:
             text.text =str(text.text)
             text.text.upper()
-            print(text.text)
-            client_teacher.markAttendance(GlobalShared.teacherId,GlobalShared.classId,text.text)
+            if (text.text != ""):
+                client_teacher.markAttendance(GlobalShared.teacherId,GlobalShared.classId,text.text)
             text.text = ""
         except:
             print("some error occured during manual attendance")
