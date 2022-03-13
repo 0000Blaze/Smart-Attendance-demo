@@ -12,43 +12,44 @@
         <div class="logo"><a href="departments.php">Smart Attendance</a></div>
         <div class="logOut-btn"><a href="../index.html">Log Out</a></div>
     </nav>
-    <?php
-    include 'connectToDb.php';
-    $username = $_SESSION["username"];
-    if (!$sqldb->select_db('sas')) 
-    {
-        die("not connected to database");
-    }
-    $getDepartmentsQuery = "SELECT name,dID from department WHERE 1";
-    if($departments = $sqldb->query($getDepartmentsQuery))
-    {
-        if (mysqli_num_rows($departments) > 0)
-        {
-            while ($departments_row = mysqli_fetch_assoc($departments)) 
+    <div class="bg-image">
+        <div class="card-holder">
+            <?php
+            include 'connectToDb.php';
+            $username = $_SESSION["username"];
+            if (!$sqldb->select_db('sas')) 
             {
-                $dID = $departments_row['dID'];
-                $departName = $departments_row['name'];       
-                ?>
-                <div class="bg-image">
-                    <div class="card-holder">
-                        <div class="card">
-                            <div class="box">
-                                <a href="bct.php?dID=<?php echo $dID;?>" >
-                                    <div class="text"><?php echo $departName?></div>                   
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php
+                die("not connected to database");
             }
-        }
-    }    
-    else
-    {
-        echo "Error running fetch department query";
-    }
-?>
-</div>
+            $getDepartmentsQuery = "SELECT name,dID from department WHERE 1";
+            if($departments = $sqldb->query($getDepartmentsQuery))
+            {
+                if (mysqli_num_rows($departments) > 0)
+                {
+                
+                    while ($departments_row = mysqli_fetch_assoc($departments)) 
+                    {
+                        $dID = $departments_row['dID'];
+                        $departName = $departments_row['name'];       
+                        ?>
+                            <div class="card">
+                                <div class="box">
+                                    <a href="bct.php?dID=<?php echo $dID;?>" >
+                                        <div class="text"><?php echo $departName?></div>                   
+                                    </a>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                }
+            }    
+            else
+            {
+                echo "Error running fetch department query";
+            }
+            ?>
+        </div>
+    </div>
 <footer>
     <span class="text1">Created By</span> <br>
     <span class="text2">Nikesh DC(PUL075BCT052) ,
