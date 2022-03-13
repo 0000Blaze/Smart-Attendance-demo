@@ -184,8 +184,7 @@ class AttendanceControlWindow(Screen):
 
     def manualPresent(self,text):
         try:
-            text.text =str(text.text)
-            text.text.upper()
+            text.text =str(text.text).upper()
             if (text.text != ""):
                 client_teacher.markAttendance(GlobalShared.teacherId,GlobalShared.classId,text.text)
             text.text = ""
