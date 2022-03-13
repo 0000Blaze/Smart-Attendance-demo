@@ -46,7 +46,7 @@
                 if ($individualAttendanceRecords = $sqldb->query($individualAttendanceRecordQuery))
                 {
                     ?>
-                    <h2 class="dateDisplay">
+                    <h2 class="dateDisplay" style="color: white; margin-left:1%;">
                         <?php 
                             echo "Total Days = $days";   
                         ?>
