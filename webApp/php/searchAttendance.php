@@ -19,6 +19,9 @@
             }
             $startDate = $_POST["startDate"];
             $endDate = $_POST["endDate"];
+            $diff = abs(strtotime($endDate) - strtotime($startDate));
+            $days = floor($diff / (60*60*24));
+            
             $subject = $_POST["subject"];
             $cID = $_POST["class"];
 
@@ -43,6 +46,11 @@
                 if ($individualAttendanceRecords = $sqldb->query($individualAttendanceRecordQuery))
                 {
                     ?>
+                    <h2 class="dateDisplay">
+                        <?php 
+                            echo "Total Days = $days";   
+                        ?>
+                    </h2>
                     <table class = "styled-table" id="Attendance_Data">
                         <tr class="top">
                             <th>Name</th>
