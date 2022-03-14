@@ -138,7 +138,8 @@ class SubjectSelectWindow(Screen):
 class AttendanceControlWindow(Screen):
     attendanceInstance = AttendanceDetail()        
     attendanceInstance.field_AttendanceId = 'No attendance code'
-        
+    afterAttendanceMessage = "Imagine this is empty"
+
     def addPresentList(self):
         x = 0
         y = 0
@@ -161,6 +162,7 @@ class AttendanceControlWindow(Screen):
             AttendanceListFromServer = client_teacher.getAttendance(GlobalShared.teacherId,GlobalShared.classId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
+                # AttendanceControlWindow.setAfterAttendanceMessage(AttendanceListFromServer["error"])
             else:
                 #update presence in list
                 keys = AttendanceListFromServer["student_list"]
@@ -177,6 +179,7 @@ class AttendanceControlWindow(Screen):
             AttendanceListFromServer = client_teacher.stopAttendance(GlobalShared.teacherId,GlobalShared.classId)
             if "error" in AttendanceListFromServer:
                 print(AttendanceListFromServer["error"])
+                # AttendanceControlWindow.setAfterAttendanceMessage(AttendanceListFromServer["error"])
             else:
                 print(AttendanceListFromServer["success"])
         except Exception as e:
@@ -190,6 +193,14 @@ class AttendanceControlWindow(Screen):
             text.text = ""
         except:
             print("some error occured during manual attendance")
+
+
+    def setStatusLabel(self, label):
+        label.text = self.afterAttendanceMessage
+
+    @classmethod
+    def setAfterAttendanceMessage(self, text):
+        self.afterAttendanceMessage = text
 
 ''' ############################################### Kivy App builder ################################################ '''
 class WindowManager(ScreenManager):
